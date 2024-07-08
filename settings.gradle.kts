@@ -19,6 +19,15 @@ dependencyResolutionManagement {
     }
 }
 
+
 rootProject.name = "PhotoGallery"
 include(":app")
- 
+
+// core
+include(":core:data")
+include(":core:domain")
+
+// Feature
+
+include(":feature:random")
+include(":feature:home")
