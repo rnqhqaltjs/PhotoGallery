@@ -28,6 +28,7 @@ include(":core:data")
 include(":core:domain")
 
 // Feature
-
-include(":feature:random")
 include(":feature:home")
+include(":feature:randomphoto")
+include(":feature:detail")
+include(":core:designsystem")
