@@ -1,7 +1,6 @@
-package com.example.home.navigation
+package com.example.home
 
 import androidx.compose.runtime.Composable
-import com.example.home.HomeScreen
 
 @Composable
 fun HomeRoute() {

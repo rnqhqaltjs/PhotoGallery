@@ -27,7 +27,7 @@ fun PGNavigationBar(
             .fillMaxWidth()
             .height(52.dp),
         horizontalArrangement = Arrangement.SpaceBetween
-        ) {
+    ) {
         NavigationBar(
             containerColor = Black90,
             content = content

@@ -2,6 +2,7 @@ package com.example.photogallery.ui
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
@@ -35,7 +36,8 @@ fun PGApp() {
                         restoreState = true
                     }
                 },
-                currentDestination = backStackEntry?.destination
+                currentDestination = backStackEntry?.destination,
+                modifier = Modifier.navigationBarsPadding()
             )
         },
     ) { contentPadding ->
