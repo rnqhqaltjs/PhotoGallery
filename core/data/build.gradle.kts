@@ -39,6 +39,7 @@ dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
+    implementation(project(":core:domain"))
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -47,6 +48,10 @@ dependencies {
     implementation(libs.retrofit.core)
     implementation(libs.retrofit.moshi)
     implementation(libs.moshi.kotlin)
+
+    implementation(libs.androidx.paging.runtime)
+    implementation(libs.androidx.paging.compose)
+    testImplementation(libs.androidx.paging.common)
 
     implementation(libs.hilt.android)
     ksp(libs.hilt.compiler)
