@@ -5,7 +5,7 @@ import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
-data class PhotosResponseDto(
+data class ResponsePhotosDto(
     @field:Json(name = "blur_hash")
     val blurHash: String?,
     @field:Json(name = "color")
