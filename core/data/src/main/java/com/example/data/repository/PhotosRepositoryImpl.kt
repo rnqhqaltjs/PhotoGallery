@@ -13,10 +13,7 @@ import javax.inject.Inject
 class PhotosRepositoryImpl @Inject constructor(
     private val photosDataSource: PhotosDataSource
 ) : PhotosRepository {
-    override fun getPhotosPaging(
-        page: Int,
-        perPage: Int
-    ): Flow<PagingData<PhotosResponseEntity>> {
+    override fun getPhotosPaging(): Flow<PagingData<PhotosResponseEntity>> {
         val pagingSourceFactory = { PhotosPagingSource(photosDataSource) }
 
         return Pager(

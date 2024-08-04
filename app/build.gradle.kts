@@ -55,6 +55,7 @@ dependencies {
     implementation(project(":feature:randomphoto"))
     implementation(project(":feature:detail"))
     implementation(project(":core:designsystem"))
+    implementation(project(":core:data"))
 
     implementation(libs.hilt.android)
     ksp(libs.hilt.compiler)

@@ -8,4 +8,7 @@ class PhotosDataSource @Inject constructor(
 ) {
     suspend fun getPhotos(page: Int, perPage: Int) =
         service.getPhotos(page, perPage)
+
+    suspend fun getRandomPhoto(count: Int) =
+        service.getRandomPhoto(count)
 }
