@@ -4,6 +4,7 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.example.data.paging.PhotosPagingSource
+import com.example.data.paging.RandomPhotoPagingSource
 import com.example.data.source.PhotosDataSource
 import com.example.domain.model.PhotosResponseEntity
 import com.example.domain.repository.PhotosRepository
@@ -21,6 +22,19 @@ class PhotosRepositoryImpl @Inject constructor(
                 pageSize = 10,
                 enablePlaceholders = false,
                 maxSize = 10 * 3
+            ),
+            pagingSourceFactory = pagingSourceFactory
+        ).flow
+    }
+
+    override fun getRandomPhoto(): Flow<PagingData<PhotosResponseEntity>> {
+        val pagingSourceFactory = { RandomPhotoPagingSource(photosDataSource) }
+
+        return Pager(
+            config = PagingConfig(
+                pageSize = 5,
+                enablePlaceholders = false,
+                maxSize = 5 * 3
             ),
             pagingSourceFactory = pagingSourceFactory
         ).flow
