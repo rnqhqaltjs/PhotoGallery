@@ -14,14 +14,14 @@ class RandomPhotoPagingSource(
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, PhotosResponseEntity> {
         return try {
             val pageNumber = params.key ?: STARTING_PAGE_INDEX
-            val response = photosDataSource.getPhotos(pageNumber, params.loadSize)
+            val response = photosDataSource.getRandomPhoto(pageNumber)
 
             val data = response.body()?.map { it.toEntity() }
             val prevKey = if (pageNumber == STARTING_PAGE_INDEX) null else pageNumber - 1
             val nextKey = if (response.body()?.isEmpty() == true) {
                 null
             } else {
-                pageNumber + (params.loadSize / 10)
+                pageNumber + (params.loadSize / 5)
             }
             LoadResult.Page(
                 data = data ?: emptyList(),

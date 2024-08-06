@@ -66,5 +66,9 @@ dependencies {
 
     implementation(libs.androidx.navigation.compose)
 
+    implementation(libs.androidx.paging.runtime)
+    implementation(libs.androidx.paging.compose)
+    testImplementation(libs.androidx.paging.common)
+
     implementation(libs.coil.compose)
 }
