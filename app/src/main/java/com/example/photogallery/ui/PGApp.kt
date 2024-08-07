@@ -5,8 +5,11 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavDestination
 import androidx.navigation.compose.currentBackStackEntryAsState
@@ -21,8 +24,11 @@ fun PGApp() {
     val navHostController = rememberNavController()
     val backStackEntry by navHostController.currentBackStackEntryAsState()
 
+    val snackbarHostState = remember { SnackbarHostState() }
+
     Scaffold(
         modifier = Modifier,
+        snackbarHost = { SnackbarHost(hostState = snackbarHostState) },
         bottomBar = {
             PGBottomBar(
                 destination = Screen.entries,
@@ -48,7 +54,8 @@ fun PGApp() {
             PGNavHost(
                 modifier = Modifier
                     .fillMaxSize(),
-                navController = navHostController
+                navController = navHostController,
+                snackbarHostState = snackbarHostState
             )
         }
     }

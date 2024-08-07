@@ -12,10 +12,14 @@ fun NavController.navigateToRandomPhoto(navOptions: NavOptions) {
     navigate(randomPhotoRoute, navOptions = navOptions)
 }
 
-fun NavGraphBuilder.randomPhotoScreen() {
+fun NavGraphBuilder.randomPhotoScreen(
+    showSnackbar: (String) -> Unit,
+) {
     composable(
         route = randomPhotoRoute,
     ) { _ ->
-        RandomPhotoRoute()
+        RandomPhotoRoute(
+            showSnackbar = showSnackbar
+        )
     }
 }
