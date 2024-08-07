@@ -1,6 +1,6 @@
-package com.example.data.di
+package com.example.network.di
 
-import com.example.data.remote.PhotoService
+import com.example.network.remote.PhotoService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

@@ -1,6 +1,6 @@
-package com.example.data.source
+package com.example.network
 
-import com.example.data.remote.PhotoService
+import com.example.network.remote.PhotoService
 import javax.inject.Inject
 
 class PhotosDataSource @Inject constructor(

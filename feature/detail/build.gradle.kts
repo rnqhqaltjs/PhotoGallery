@@ -43,6 +43,7 @@ dependencies {
     implementation(libs.material)
     implementation(project(":core:designsystem"))
     implementation(project(":core:domain"))
+    implementation(project(":core:common"))
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

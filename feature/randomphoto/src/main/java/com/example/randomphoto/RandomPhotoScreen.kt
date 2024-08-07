@@ -36,7 +36,8 @@ import com.example.domain.model.PhotosResponseEntity
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun RandomPhotoScreen(
-    randomPhoto: LazyPagingItems<PhotosResponseEntity>
+    randomPhoto: LazyPagingItems<PhotosResponseEntity>,
+    onBookmarkClick: (PhotosResponseEntity) -> Unit
 ) {
     Scaffold(
         topBar = { PGAppBar() }
@@ -57,7 +58,9 @@ fun RandomPhotoScreen(
             RandomPhoto(
                 photoUrl = randomPhoto[pageIndex]?.url,
                 onCloseClick = {},
-                onBookmarkClick = {},
+                onBookmarkClick = {
+                    randomPhoto[pageIndex]?.let { onBookmarkClick(it) }
+                },
                 onInfoClick = {}
             )
         }
@@ -102,7 +105,7 @@ fun RandomPhoto(
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(top= 20.dp, bottom = 32.dp),
+                    .padding(top = 20.dp, bottom = 32.dp),
                 horizontalArrangement = Arrangement.SpaceEvenly,
                 verticalAlignment = Alignment.CenterVertically
             ) {

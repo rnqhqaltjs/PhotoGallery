@@ -3,8 +3,8 @@ package com.example.data.paging
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.example.data.mapper.PhotoMapper.toEntity
-import com.example.data.source.PhotosDataSource
 import com.example.domain.model.PhotosResponseEntity
+import com.example.network.PhotosDataSource
 import retrofit2.HttpException
 import java.io.IOException
 

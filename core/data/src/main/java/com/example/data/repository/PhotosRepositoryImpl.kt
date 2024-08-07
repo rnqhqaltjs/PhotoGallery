@@ -5,9 +5,9 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.example.data.paging.PhotosPagingSource
 import com.example.data.paging.RandomPhotoPagingSource
-import com.example.data.source.PhotosDataSource
 import com.example.domain.model.PhotosResponseEntity
 import com.example.domain.repository.PhotosRepository
+import com.example.network.PhotosDataSource
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
