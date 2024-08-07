@@ -20,6 +20,7 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -32,13 +33,17 @@ import coil.compose.AsyncImage
 import com.example.designsystem.R
 import com.example.designsystem.component.PGAppBar
 import com.example.domain.model.PhotosResponseEntity
+import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun RandomPhotoScreen(
     randomPhoto: LazyPagingItems<PhotosResponseEntity>,
-    onBookmarkClick: (PhotosResponseEntity) -> Unit
+    onBookmarkClick: (PhotosResponseEntity) -> Unit,
+    showSnackbar: (String) -> Unit
 ) {
+    val coroutineScope = rememberCoroutineScope()
+
     Scaffold(
         topBar = { PGAppBar() }
     ) { paddingValues ->
@@ -59,7 +64,13 @@ fun RandomPhotoScreen(
                 photoUrl = randomPhoto[pageIndex]?.url,
                 onCloseClick = {},
                 onBookmarkClick = {
-                    randomPhoto[pageIndex]?.let { onBookmarkClick(it) }
+                    randomPhoto[pageIndex]?.let {
+                        onBookmarkClick(it)
+                    }
+                    showSnackbar("북마크 완료")
+                    coroutineScope.launch {
+                        pagerState.animateScrollToPage(pageIndex + 1)
+                    }
                 },
                 onInfoClick = {}
             )
@@ -97,7 +108,7 @@ fun RandomPhoto(
             ) {
                 AsyncImage(
                     model = photoUrl,
-                    contentDescription = null,
+                    contentDescription = "randomPhoto image",
                     contentScale = ContentScale.FillWidth,
                     modifier = Modifier.align(Alignment.Center)
                 )
