@@ -10,5 +10,8 @@ fun RandomPhotoRoute(
 ) {
     val randomPhoto = randomPhotoViewModel.randomPhoto.collectAsLazyPagingItems()
 
-    RandomPhotoScreen(randomPhoto)
+    RandomPhotoScreen(
+        randomPhoto = randomPhoto,
+        onBookmarkClick = { randomPhotoViewModel.addBookmark(it) }
+    )
 }

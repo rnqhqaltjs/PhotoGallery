@@ -1,6 +1,6 @@
-package com.example.data.remote
+package com.example.network.remote
 
-import com.example.data.model.ResponsePhotosDto
+import com.example.network.model.ResponsePhotosDto
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
