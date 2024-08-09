@@ -16,15 +16,15 @@ class PhotosPagingSource(
             val pageNumber = params.key ?: STARTING_PAGE_INDEX
             val response = photosDataSource.getPhotos(pageNumber, params.loadSize)
 
-            val data = response.body()?.map { it.toEntity() }
+            val data = response.map { it.toEntity() }
             val prevKey = if (pageNumber == STARTING_PAGE_INDEX) null else pageNumber - 1
-            val nextKey = if (response.body()?.isEmpty() == true) {
+            val nextKey = if (response.isEmpty()) {
                 null
             } else {
                 pageNumber + (params.loadSize / 10)
             }
             LoadResult.Page(
-                data = data ?: emptyList(),
+                data = data,
                 prevKey = prevKey,
                 nextKey = nextKey,
             )

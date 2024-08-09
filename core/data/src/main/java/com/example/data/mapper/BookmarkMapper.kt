@@ -7,8 +7,9 @@ object BookmarkMapper {
     fun BookmarkEntity.toModel(): PhotosResponseEntity {
         return PhotosResponseEntity(
             id = this.id,
-            createdAt = this.createdAt,
+            title = this.title,
             description = this.description,
+            userName = this.userName,
             url = this.url
         )
     }
@@ -16,8 +17,9 @@ object BookmarkMapper {
     fun PhotosResponseEntity.toEntity(): BookmarkEntity {
         return BookmarkEntity(
             id = this.id,
-            createdAt = this.createdAt,
+            title = this.title,
             description = this.description,
+            userName = this.userName,
             url = this.url
         )
     }

@@ -1,9 +1,13 @@
 package com.example.photogallery.ui
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
@@ -14,10 +18,12 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavDestination
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.example.designsystem.component.PGAppBar
 import com.example.designsystem.component.PGNavigationBar
 import com.example.designsystem.component.PGNavigationBarItem
 import com.example.photogallery.navigation.PGNavHost
 import com.example.photogallery.navigation.Screen
+import com.example.photogallery.navigation.shouldShowBottomBar
 
 @Composable
 fun PGApp() {
@@ -25,10 +31,17 @@ fun PGApp() {
     val backStackEntry by navHostController.currentBackStackEntryAsState()
 
     val snackbarHostState = remember { SnackbarHostState() }
+    val isVisible = shouldShowBottomBar(currentDestination = backStackEntry?.destination)
 
     Scaffold(
         modifier = Modifier,
         snackbarHost = { SnackbarHost(hostState = snackbarHostState) },
+        topBar = {
+            PGAppBar(
+                modifier = Modifier.statusBarsPadding(),
+                isVisible = isVisible
+            )
+        },
         bottomBar = {
             PGBottomBar(
                 destination = Screen.entries,
@@ -43,7 +56,8 @@ fun PGApp() {
                     }
                 },
                 currentDestination = backStackEntry?.destination,
-                modifier = Modifier.navigationBarsPadding()
+                modifier = Modifier.navigationBarsPadding(),
+                isVisible = isVisible
             )
         },
     ) { contentPadding ->
@@ -52,8 +66,7 @@ fun PGApp() {
             Modifier.padding(contentPadding)
         ) {
             PGNavHost(
-                modifier = Modifier
-                    .fillMaxSize(),
+                modifier = Modifier.fillMaxSize(),
                 navController = navHostController,
                 snackbarHostState = snackbarHostState
             )
@@ -67,18 +80,26 @@ private fun PGBottomBar(
     onNavigateToDestination: (Screen) -> Unit,
     currentDestination: NavDestination?,
     modifier: Modifier = Modifier,
+    isVisible: Boolean
 ) {
-    PGNavigationBar(
-        modifier = modifier,
+    AnimatedVisibility(
+        visible = isVisible,
+        enter = slideInVertically(initialOffsetY = { it }),
+        exit = slideOutVertically(targetOffsetY = { it }),
+        modifier = modifier
     ) {
-        destination.forEach { destination ->
-            val isSelected = currentDestination?.route == destination.route
+        PGNavigationBar(
+            modifier = modifier,
+        ) {
+            destination.forEach { destination ->
+                val isSelected = currentDestination?.route == destination.route
 
-            PGNavigationBarItem(
-                selected = isSelected,
-                onClick = { onNavigateToDestination(destination) },
-                iconResId = destination.iconResId
-            )
+                PGNavigationBarItem(
+                    selected = isSelected,
+                    onClick = { onNavigateToDestination(destination) },
+                    iconResId = destination.iconResId
+                )
+            }
         }
     }
 }

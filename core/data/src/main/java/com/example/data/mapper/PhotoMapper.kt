@@ -7,8 +7,9 @@ object PhotoMapper {
     fun ResponsePhotosDto.toEntity(): PhotosResponseEntity {
         return PhotosResponseEntity(
             id = this.id,
-            createdAt = this.createdAt,
+            title = this.altDescription,
             description = this.description,
+            userName = this.user.name,
             url = this.urls.regular
         )
     }

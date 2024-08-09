@@ -28,4 +28,8 @@ class BookmarkRepositoryImpl @Inject constructor(
                 }
             }
     }
+
+    override fun isBookmarked(id: String): Flow<Boolean> {
+        return bookmarkDao.isBookmarked(id)
+    }
 }

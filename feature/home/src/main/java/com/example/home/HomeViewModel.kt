@@ -43,8 +43,6 @@ class HomeViewModel @Inject constructor(
 
 sealed interface BookmarkUiState {
     data class Success(val data: List<PhotosResponseEntity>) : BookmarkUiState
-
     data class Failure(val t: Throwable?) : BookmarkUiState
-
     data object Loading : BookmarkUiState
 }
