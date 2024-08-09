@@ -6,6 +6,8 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
+import com.example.detail.navigation.detailScreen
+import com.example.detail.navigation.navigateToDetail
 import com.example.home.navigation.homeRoute
 import com.example.home.navigation.homeScreen
 import com.example.randomphoto.navigation.randomPhotoScreen
@@ -26,12 +28,20 @@ fun PGNavHost(
         navController = navController,
         startDestination = homeRoute
     ) {
-        homeScreen()
+        homeScreen(
+            onNavigateToDetail = { itemId ->
+                navController.navigateToDetail(itemId)
+            }
+        )
         randomPhotoScreen(
             showSnackbar = { message ->
                 snackbarHostState.showMessage(coroutineScope, message)
             },
+            onNavigateToDetail = { itemId ->
+                navController.navigateToDetail(itemId)
+            }
         )
+        detailScreen(popBackStack = navController::popBackStack)
     }
 }
 

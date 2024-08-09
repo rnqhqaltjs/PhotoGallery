@@ -18,7 +18,6 @@ import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
@@ -31,7 +30,6 @@ import androidx.compose.ui.unit.dp
 import androidx.paging.compose.LazyPagingItems
 import coil.compose.AsyncImage
 import com.example.designsystem.R
-import com.example.designsystem.component.PGAppBar
 import com.example.domain.model.PhotosResponseEntity
 import kotlinx.coroutines.launch
 
@@ -40,41 +38,40 @@ import kotlinx.coroutines.launch
 fun RandomPhotoScreen(
     randomPhoto: LazyPagingItems<PhotosResponseEntity>,
     onBookmarkClick: (PhotosResponseEntity) -> Unit,
+    onNavigateToDetail: (String) -> Unit,
     showSnackbar: (String) -> Unit
 ) {
     val coroutineScope = rememberCoroutineScope()
 
-    Scaffold(
-        topBar = { PGAppBar() }
-    ) { paddingValues ->
-        val pagerState = rememberPagerState(
-            initialPage = 1,
-            pageCount = { randomPhoto.itemCount }
-        )
+    val pagerState = rememberPagerState(
+        initialPage = 1,
+        pageCount = { randomPhoto.itemCount }
+    )
 
-        HorizontalPager(
-            modifier = Modifier
-                .padding(paddingValues)
-                .padding(top = 36.dp, bottom = 8.dp),
-            pageSpacing = 10.dp,
-            contentPadding = PaddingValues(horizontal = 25.dp),
-            state = pagerState
-        ) { pageIndex ->
-            RandomPhoto(
-                photoUrl = randomPhoto[pageIndex]?.url,
-                onCloseClick = {},
-                onBookmarkClick = {
-                    randomPhoto[pageIndex]?.let {
-                        onBookmarkClick(it)
-                    }
-                    showSnackbar("북마크 완료")
-                    coroutineScope.launch {
-                        pagerState.animateScrollToPage(pageIndex + 1)
-                    }
-                },
-                onInfoClick = {}
-            )
-        }
+    HorizontalPager(
+        modifier = Modifier
+            .padding(
+                top = 30.dp,
+                bottom = 50.dp
+            ),
+        pageSpacing = 10.dp,
+        contentPadding = PaddingValues(horizontal = 25.dp),
+        state = pagerState
+    ) { pageIndex ->
+        RandomPhoto(
+            photoUrl = randomPhoto[pageIndex]?.url,
+            onCloseClick = {},
+            onBookmarkClick = {
+                randomPhoto[pageIndex]?.let {
+                    onBookmarkClick(it)
+                }
+                showSnackbar("북마크 완료")
+                coroutineScope.launch {
+                    pagerState.animateScrollToPage(pageIndex + 1)
+                }
+            },
+            onInfoClick = { randomPhoto[pageIndex]?.let { onNavigateToDetail(it.id) } }
+        )
     }
 }
 

@@ -19,6 +19,9 @@ interface BookmarkDao {
     @Query("SELECT * FROM bookmarks")
     fun getBookmarkPhoto(): Flow<List<BookmarkEntity>>
 
-    @Query("SELECT * FROM bookmarks WHERE id = :bookmarkId")
-    fun getBookmarkDetail(bookmarkId: String): BookmarkEntity
+    @Query("SELECT * FROM bookmarks WHERE id = :id")
+    fun getBookmarkDetail(id: String): BookmarkEntity
+
+    @Query("SELECT EXISTS(SELECT * FROM bookmarks WHERE id = :id)")
+    fun isBookmarked(id: String): Flow<Boolean>
 }

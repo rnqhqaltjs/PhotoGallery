@@ -1,5 +1,10 @@
 package com.example.designsystem.component
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -19,24 +24,32 @@ import com.example.designsystem.theme.PhotoGalleryTheme
 
 @Composable
 fun PGAppBar(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    isVisible: Boolean
 ) {
-    Box(
-        contentAlignment = Alignment.Center,
+    AnimatedVisibility(
+        visible = isVisible,
+        enter = slideInVertically(initialOffsetY = { -it }),
+        exit = slideOutVertically(targetOffsetY = { -it }),
         modifier = modifier
-            .fillMaxWidth()
-            .background(MaterialTheme.colorScheme.background)
     ) {
-        Image(
-            painter = painterResource(id = R.drawable.ic_prography),
-            contentDescription = "app title",
-            modifier = Modifier.padding(top = 22.dp, bottom = 18.dp)
-        )
-        HorizontalDivider(
-            modifier = Modifier.align(Alignment.BottomCenter),
-            thickness = 1.5.dp,
-            color = Gray30
-        )
+        Box(
+            contentAlignment = Alignment.Center,
+            modifier = modifier
+                .fillMaxWidth()
+                .background(MaterialTheme.colorScheme.background)
+        ) {
+            Image(
+                painter = painterResource(id = R.drawable.ic_prography),
+                contentDescription = "app title",
+                modifier = Modifier.padding(top = 22.dp, bottom = 18.dp)
+            )
+            HorizontalDivider(
+                modifier = Modifier.align(Alignment.BottomCenter),
+                thickness = 1.5.dp,
+                color = Gray30
+            )
+        }
     }
 }
 
@@ -44,6 +57,6 @@ fun PGAppBar(
 @Composable
 fun PGAppBarPreview() {
     PhotoGalleryTheme {
-        PGAppBar()
+        PGAppBar(isVisible = true)
     }
 }

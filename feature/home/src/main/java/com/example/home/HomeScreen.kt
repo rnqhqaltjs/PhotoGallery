@@ -1,5 +1,6 @@
 package com.example.home
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
@@ -12,7 +13,6 @@ import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
 import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridItemSpan
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -30,92 +30,87 @@ import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.itemKey
 import coil.compose.AsyncImage
 import com.example.designsystem.R
-import com.example.designsystem.component.PGAppBar
 import com.example.domain.model.PhotosResponseEntity
 
 @Composable
 fun HomeScreen(
     photos: LazyPagingItems<PhotosResponseEntity>,
-    bookmarkUiState: BookmarkUiState
+    bookmarkUiState: BookmarkUiState,
+    onNavigateToDetail: (String) -> Unit
 ) {
-    Scaffold(topBar = { PGAppBar() }) { paddingValues ->
-        if (bookmarkUiState !is BookmarkUiState.Success) return@Scaffold
-        LazyVerticalStaggeredGrid(
-            columns = StaggeredGridCells.Fixed(2),
-            horizontalArrangement = Arrangement.spacedBy(10.dp),
-            contentPadding = PaddingValues(
-                horizontal = 20.dp,
-                vertical = 10.dp
-            ),
-            verticalItemSpacing = 10.dp,
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(top = paddingValues.calculateTopPadding())
-        ) {
-            if (bookmarkUiState.data.isNotEmpty()) {
-                item(span = StaggeredGridItemSpan.FullLine) {
-                    TitleText(title = "북마크")
-                }
+    if (bookmarkUiState !is BookmarkUiState.Success) return
 
-                item(span = StaggeredGridItemSpan.FullLine) {
-                    LazyRow(
-                        horizontalArrangement = Arrangement.spacedBy(10.dp)
-                    ) {
-                        items(
-                            count = bookmarkUiState.data.count()
-                        ) {
-                            AsyncImage(
-                                model = bookmarkUiState.data[it].url,
-                                contentDescription = "bookmark image",
-                                contentScale = ContentScale.FillWidth,
-                                modifier = Modifier
-                                    .height(120.dp)
-                                    .clip(RoundedCornerShape(12.dp))
-                            )
-                        }
-                    }
-                }
+    LazyVerticalStaggeredGrid(
+        columns = StaggeredGridCells.Fixed(2),
+        horizontalArrangement = Arrangement.spacedBy(10.dp),
+        contentPadding = PaddingValues(
+            horizontal = 20.dp,
+            vertical = 10.dp
+        ),
+        verticalItemSpacing = 10.dp,
+        modifier = Modifier.fillMaxSize()
+    ) {
+        if (bookmarkUiState.data.isNotEmpty()) {
+            item(span = StaggeredGridItemSpan.FullLine) {
+                TitleText(title = "북마크")
             }
 
             item(span = StaggeredGridItemSpan.FullLine) {
-                TitleText(title = "최신 이미지")
-            }
-
-            items(
-                count = photos.itemCount,
-                key = photos.itemKey(),
-            ) {
-                Card(
-                    shape = RoundedCornerShape(12.dp),
-                    onClick = {}
+                LazyRow(
+                    horizontalArrangement = Arrangement.spacedBy(10.dp)
                 ) {
-                    Box(
-                        modifier = Modifier.fillMaxSize()
-                    ) {
+                    items(
+                        count = bookmarkUiState.data.count()
+                    ) { index ->
                         AsyncImage(
-                            model = photos[it]?.url,
-                            contentDescription = "photos image",
-                            contentScale = ContentScale.FillWidth,
-                            modifier = Modifier.fillMaxSize()
-                        )
-                        Text(
-                            text = photos[it]?.description ?: "",
-                            maxLines = 2,
-                            overflow = TextOverflow.Ellipsis,
-                            style = TextStyle(
-                                fontSize = 13.sp,
-                                fontFamily = FontFamily(Font(R.font.pretendard_medium))
-                            ),
-                            color = Color.White,
+                            model = bookmarkUiState.data[index].url,
+                            contentDescription = "bookmark image",
+                            contentScale = ContentScale.Fit,
                             modifier = Modifier
-                                .align(Alignment.BottomStart)
-                                .padding(
-                                    start = 8.dp,
-                                    bottom = 8.dp,
-                                    end = 8.dp
-                                )
+                                .height(120.dp)
+                                .clip(RoundedCornerShape(12.dp))
+                                .clickable {
+                                    onNavigateToDetail(bookmarkUiState.data[index].id)
+                                }
                         )
                     }
+                }
+            }
+        }
+
+        item(span = StaggeredGridItemSpan.FullLine) {
+            TitleText(title = "최신 이미지")
+        }
+
+        items(
+            count = photos.itemCount,
+            key = photos.itemKey(),
+        ) { index ->
+            Card(
+                shape = RoundedCornerShape(12.dp),
+                onClick = { photos[index]?.let { onNavigateToDetail(it.id) } }
+            ) {
+                Box(
+                    modifier = Modifier.fillMaxSize()
+                ) {
+                    AsyncImage(
+                        model = photos[index]?.url,
+                        contentDescription = "photos image",
+                        contentScale = ContentScale.FillWidth
+                    )
+                    Text(
+                        text = photos[index]?.title ?: "",
+                        maxLines = 2,
+                        overflow = TextOverflow.Ellipsis,
+                        style = TextStyle(
+                            fontSize = 13.sp,
+                            fontFamily = FontFamily(Font(R.font.pretendard_medium))
+                        ),
+                        color = Color.White,
+                        modifier = Modifier
+                            .align(Alignment.BottomStart)
+                            .padding(8.dp)
+                    )
                 }
             }
         }

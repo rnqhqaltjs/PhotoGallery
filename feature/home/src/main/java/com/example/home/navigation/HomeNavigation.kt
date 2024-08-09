@@ -8,14 +8,18 @@ import com.example.home.HomeRoute
 
 const val homeRoute = "home_route"
 
-fun NavController.navigateToHome(navOptions: NavOptions) {
+fun NavController.navigateToHome(navOptions: NavOptions? = null) {
     navigate(homeRoute, navOptions = navOptions)
 }
 
-fun NavGraphBuilder.homeScreen() {
+fun NavGraphBuilder.homeScreen(
+    onNavigateToDetail: (String) -> Unit,
+) {
     composable(
         route = homeRoute,
     ) { _ ->
-        HomeRoute()
+        HomeRoute(
+            onNavigateToDetail = onNavigateToDetail
+        )
     }
 }

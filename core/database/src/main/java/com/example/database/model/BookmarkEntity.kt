@@ -9,7 +9,9 @@ data class BookmarkEntity(
     @PrimaryKey(autoGenerate = false)
     val id: String,
     @ColumnInfo(name = "create_at")
-    val createdAt: String?,
+    val title: String?,
     val description: String?,
+    @ColumnInfo(name = "user_name")
+    val userName: String,
     val url: String
 )
