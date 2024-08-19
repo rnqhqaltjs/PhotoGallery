@@ -6,9 +6,9 @@ import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.example.common.Result
 import com.example.common.asResult
-import com.example.domain.model.PhotosResponseEntity
 import com.example.domain.usecase.GetBookmarkPhotoUseCase
 import com.example.domain.usecase.GetPhotosUseCase
+import com.example.model.Photo
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.SharingStarted
@@ -22,7 +22,7 @@ class HomeViewModel @Inject constructor(
     getPhotosUseCase: GetPhotosUseCase,
     getBookmarkPhotoUseCase: GetBookmarkPhotoUseCase
 ) : ViewModel() {
-    val photos: Flow<PagingData<PhotosResponseEntity>> =
+    val photo: Flow<PagingData<Photo>> =
         getPhotosUseCase().distinctUntilChanged().cachedIn(viewModelScope)
 
     val bookmarkPhoto = getBookmarkPhotoUseCase()
@@ -42,7 +42,7 @@ class HomeViewModel @Inject constructor(
 }
 
 sealed interface BookmarkUiState {
-    data class Success(val data: List<PhotosResponseEntity>) : BookmarkUiState
+    data class Success(val data: List<Photo>) : BookmarkUiState
     data class Failure(val t: Throwable?) : BookmarkUiState
     data object Loading : BookmarkUiState
 }

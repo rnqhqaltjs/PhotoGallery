@@ -11,11 +11,11 @@ fun HomeRoute(
     homeViewModel: HomeViewModel = hiltViewModel(),
     onNavigateToDetail: (String) -> Unit
 ) {
-    val photos = homeViewModel.photos.collectAsLazyPagingItems()
+    val photos = homeViewModel.photo.collectAsLazyPagingItems()
     val bookmarkPhoto by homeViewModel.bookmarkPhoto.collectAsStateWithLifecycle()
 
     HomeScreen(
-        photos = photos,
+        photo = photos,
         bookmarkUiState = bookmarkPhoto,
         onNavigateToDetail = onNavigateToDetail
     )

@@ -1,11 +1,11 @@
 package com.example.data.mapper
 
-import com.example.domain.model.PhotosResponseEntity
-import com.example.network.model.ResponsePhotosDto
+import com.example.model.Photo
+import com.example.network.model.PhotoResponse
 
 object PhotoMapper {
-    fun ResponsePhotosDto.toEntity(): PhotosResponseEntity {
-        return PhotosResponseEntity(
+    fun PhotoResponse.toModel(): Photo {
+        return Photo(
             id = this.id,
             title = this.altDescription,
             description = this.description,

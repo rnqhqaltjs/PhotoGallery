@@ -30,11 +30,11 @@ import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.itemKey
 import coil.compose.AsyncImage
 import com.example.designsystem.R
-import com.example.domain.model.PhotosResponseEntity
+import com.example.model.Photo
 
 @Composable
 fun HomeScreen(
-    photos: LazyPagingItems<PhotosResponseEntity>,
+    photo: LazyPagingItems<Photo>,
     bookmarkUiState: BookmarkUiState,
     onNavigateToDetail: (String) -> Unit
 ) {
@@ -83,23 +83,23 @@ fun HomeScreen(
         }
 
         items(
-            count = photos.itemCount,
-            key = photos.itemKey(),
+            count = photo.itemCount,
+            key = photo.itemKey(),
         ) { index ->
             Card(
                 shape = RoundedCornerShape(12.dp),
-                onClick = { photos[index]?.let { onNavigateToDetail(it.id) } }
+                onClick = { photo[index]?.let { onNavigateToDetail(it.id) } }
             ) {
                 Box(
                     modifier = Modifier.fillMaxSize()
                 ) {
                     AsyncImage(
-                        model = photos[index]?.url,
+                        model = photo[index]?.url,
                         contentDescription = "photos image",
                         contentScale = ContentScale.FillWidth
                     )
                     Text(
-                        text = photos[index]?.title ?: "",
+                        text = photo[index]?.title ?: "",
                         maxLines = 2,
                         overflow = TextOverflow.Ellipsis,
                         style = TextStyle(

@@ -1,6 +1,6 @@
-package com.example.domain.model
+package com.example.model
 
-data class Bookmark(
+data class Photo(
     val id: String,
     val title: String?,
     val description: String?,
