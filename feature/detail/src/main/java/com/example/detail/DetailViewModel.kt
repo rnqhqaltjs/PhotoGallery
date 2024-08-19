@@ -5,9 +5,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.common.Result
 import com.example.common.asResult
-import com.example.domain.model.PhotosResponseEntity
 import com.example.domain.repository.BookmarkRepository
 import com.example.domain.usecase.GetPhotoDetailUseCase
+import com.example.model.Photo
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.map
@@ -38,20 +38,20 @@ class DetailViewModel @Inject constructor(
             initialValue = DetailUiState.Loading
         )
 
-    fun addBookmark(photosResponseEntity: PhotosResponseEntity) {
+    private fun addBookmark(photo: Photo) {
         viewModelScope.launch {
             try {
-                bookmarkRepository.addBookmark(photosResponseEntity)
+                bookmarkRepository.addBookmark(photo)
             } catch (e: Exception) {
                 e.printStackTrace()
             }
         }
     }
 
-    fun deleteBookmark(photosResponseEntity: PhotosResponseEntity) {
+    private fun deleteBookmark(photo: Photo) {
         viewModelScope.launch {
             try {
-                bookmarkRepository.deleteBookmark(photosResponseEntity)
+                bookmarkRepository.deleteBookmark(photo)
             } catch (e: Exception) {
                 e.printStackTrace()
             }
@@ -65,19 +65,19 @@ class DetailViewModel @Inject constructor(
             initialValue = false
         )
 
-    fun toggleBookmark(photosResponseEntity: PhotosResponseEntity) {
+    fun toggleBookmark(photo: Photo) {
         viewModelScope.launch {
             if (isBookmarked.value) {
-                deleteBookmark(photosResponseEntity)
+                deleteBookmark(photo)
             } else {
-                addBookmark(photosResponseEntity)
+                addBookmark(photo)
             }
         }
     }
 }
 
 sealed interface DetailUiState {
-    data class Success(val data: PhotosResponseEntity) : DetailUiState
+    data class Success(val data: Photo) : DetailUiState
     data class Failure(val t: Throwable?) : DetailUiState
     data object Loading : DetailUiState
 }

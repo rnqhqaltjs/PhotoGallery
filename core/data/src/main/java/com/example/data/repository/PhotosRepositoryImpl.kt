@@ -3,11 +3,11 @@ package com.example.data.repository
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
-import com.example.data.mapper.PhotoMapper.toEntity
+import com.example.data.mapper.PhotoMapper.toModel
 import com.example.data.paging.PhotosPagingSource
 import com.example.data.paging.RandomPhotoPagingSource
-import com.example.domain.model.PhotosResponseEntity
 import com.example.domain.repository.PhotosRepository
+import com.example.model.Photo
 import com.example.network.PhotosDataSource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -16,7 +16,7 @@ import javax.inject.Inject
 class PhotosRepositoryImpl @Inject constructor(
     private val photosDataSource: PhotosDataSource
 ) : PhotosRepository {
-    override fun getPhotosPaging(): Flow<PagingData<PhotosResponseEntity>> {
+    override fun getPhotosPaging(): Flow<PagingData<Photo>> {
         val pagingSourceFactory = { PhotosPagingSource(photosDataSource) }
 
         return Pager(
@@ -29,14 +29,14 @@ class PhotosRepositoryImpl @Inject constructor(
         ).flow
     }
 
-    override fun getPhotoDetail(id: String): Flow<PhotosResponseEntity> {
+    override fun getPhotoDetail(id: String): Flow<Photo> {
         return flow {
             val result = photosDataSource.getPhotoDetail(id)
-            emit(result.toEntity())
+            emit(result.toModel())
         }
     }
 
-    override fun getRandomPhoto(): Flow<PagingData<PhotosResponseEntity>> {
+    override fun getRandomPhoto(): Flow<PagingData<Photo>> {
         val pagingSourceFactory = { RandomPhotoPagingSource(photosDataSource) }
 
         return Pager(

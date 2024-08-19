@@ -40,6 +40,7 @@ dependencies {
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
     implementation(project(":core:domain"))
+    implementation(project(":core:model"))
     implementation(project(":core:network"))
     implementation(project(":core:database"))
     testImplementation(libs.junit)

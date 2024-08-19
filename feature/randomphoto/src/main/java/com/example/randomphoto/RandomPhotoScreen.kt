@@ -30,14 +30,14 @@ import androidx.compose.ui.unit.dp
 import androidx.paging.compose.LazyPagingItems
 import coil.compose.AsyncImage
 import com.example.designsystem.R
-import com.example.domain.model.PhotosResponseEntity
+import com.example.model.Photo
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun RandomPhotoScreen(
-    randomPhoto: LazyPagingItems<PhotosResponseEntity>,
-    onBookmarkClick: (PhotosResponseEntity) -> Unit,
+    randomPhoto: LazyPagingItems<Photo>,
+    onBookmarkClick: (Photo) -> Unit,
     onNavigateToDetail: (String) -> Unit,
     showSnackbar: (String) -> Unit
 ) {

@@ -2,12 +2,11 @@ package com.example.domain.usecase
 
 import com.example.domain.repository.BookmarkRepository
 import com.example.model.Photo
-import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-class GetBookmarkPhotoUseCase @Inject constructor(
+class AddBookmarkUseCase @Inject constructor(
     private val bookmarkRepository: BookmarkRepository
 ) {
-    operator fun invoke(): Flow<List<Photo>> =
-        bookmarkRepository.getBookmarkPhoto()
+    suspend operator fun invoke(photo: Photo) =
+        bookmarkRepository.addBookmark(photo)
 }

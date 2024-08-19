@@ -2,7 +2,7 @@ package com.example.network.model
 
 import com.squareup.moshi.Json
 
-data class ResponsePhotosDto(
+data class PhotoResponse(
     @Json(name = "id")
     val id: String,
     @Json(name = "slug")

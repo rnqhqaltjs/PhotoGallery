@@ -1,11 +1,11 @@
 package com.example.data.mapper
 
 import com.example.database.model.BookmarkEntity
-import com.example.domain.model.PhotosResponseEntity
+import com.example.model.Photo
 
 object BookmarkMapper {
-    fun BookmarkEntity.toModel(): PhotosResponseEntity {
-        return PhotosResponseEntity(
+    fun BookmarkEntity.toModel(): Photo {
+        return Photo(
             id = this.id,
             title = this.title,
             description = this.description,
@@ -14,7 +14,7 @@ object BookmarkMapper {
         )
     }
 
-    fun PhotosResponseEntity.toEntity(): BookmarkEntity {
+    fun Photo.toEntity(): BookmarkEntity {
         return BookmarkEntity(
             id = this.id,
             title = this.title,

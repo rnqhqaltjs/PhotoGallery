@@ -29,13 +29,13 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.example.designsystem.R
-import com.example.domain.model.PhotosResponseEntity
+import com.example.model.Photo
 
 @Composable
 fun DetailScreen(
     popBackStack: () -> Unit,
     detailUiState: DetailUiState,
-    onBookmarkClick: (PhotosResponseEntity) -> Unit,
+    onBookmarkClick: (Photo) -> Unit,
     isBookmarked: Boolean
 ) {
 //    val systemUiController = rememberSystemUiController()
