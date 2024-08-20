@@ -62,8 +62,7 @@ fun PGApp() {
         },
     ) { contentPadding ->
         Box(
-            modifier =
-            Modifier.padding(contentPadding)
+            modifier = Modifier.padding(contentPadding)
         ) {
             PGNavHost(
                 modifier = Modifier.fillMaxSize(),

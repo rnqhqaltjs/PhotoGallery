@@ -18,11 +18,8 @@ class RandomPhotoPagingSource(
 
             val data = response.map { it.toModel() }
             val prevKey = if (pageNumber == STARTING_PAGE_INDEX) null else pageNumber - 1
-            val nextKey = if (response.isEmpty()) {
-                null
-            } else {
-                pageNumber + (params.loadSize / 5)
-            }
+            val nextKey = if (response.isEmpty()) null else pageNumber + 1
+            
             LoadResult.Page(
                 data = data,
                 prevKey = prevKey,
