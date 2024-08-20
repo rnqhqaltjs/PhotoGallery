@@ -1,35 +1,28 @@
 package com.example.home
 
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
 import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
 import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridItemSpan
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Card
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.Font
-import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.itemKey
-import coil.compose.AsyncImage
-import com.example.designsystem.R
+import com.example.designsystem.shimmerLoadingAnimation
+import com.example.designsystem.theme.Gray20
+import com.example.home.component.BookmarkCard
+import com.example.home.component.PhotoCard
+import com.example.home.component.SectionTitle
 import com.example.model.Photo
 
 @Composable
@@ -38,8 +31,6 @@ fun HomeScreen(
     bookmarkUiState: BookmarkUiState,
     onNavigateToDetail: (String) -> Unit
 ) {
-    if (bookmarkUiState !is BookmarkUiState.Success) return
-
     LazyVerticalStaggeredGrid(
         columns = StaggeredGridCells.Fixed(2),
         horizontalArrangement = Arrangement.spacedBy(10.dp),
@@ -50,9 +41,9 @@ fun HomeScreen(
         verticalItemSpacing = 10.dp,
         modifier = Modifier.fillMaxSize()
     ) {
-        if (bookmarkUiState.data.isNotEmpty()) {
+        if (bookmarkUiState is BookmarkUiState.Success && bookmarkUiState.data.isNotEmpty()) {
             item(span = StaggeredGridItemSpan.FullLine) {
-                TitleText(title = "북마크")
+                SectionTitle(title = "북마크")
             }
 
             item(span = StaggeredGridItemSpan.FullLine) {
@@ -62,16 +53,9 @@ fun HomeScreen(
                     items(
                         count = bookmarkUiState.data.count()
                     ) { index ->
-                        AsyncImage(
-                            model = bookmarkUiState.data[index].url,
-                            contentDescription = "bookmark image",
-                            contentScale = ContentScale.Fit,
-                            modifier = Modifier
-                                .height(120.dp)
-                                .clip(RoundedCornerShape(12.dp))
-                                .clickable {
-                                    onNavigateToDetail(bookmarkUiState.data[index].id)
-                                }
+                        BookmarkCard(
+                            imageUrl = bookmarkUiState.data[index].url,
+                            onClick = { onNavigateToDetail(bookmarkUiState.data[index].id) }
                         )
                     }
                 }
@@ -79,38 +63,23 @@ fun HomeScreen(
         }
 
         item(span = StaggeredGridItemSpan.FullLine) {
-            TitleText(title = "최신 이미지")
+            SectionTitle(title = "최신 이미지")
         }
 
-        items(
-            count = photo.itemCount,
-            key = photo.itemKey(),
-        ) { index ->
-            Card(
-                shape = RoundedCornerShape(12.dp),
-                onClick = { photo[index]?.let { onNavigateToDetail(it.id) } }
-            ) {
-                Box(
-                    modifier = Modifier.fillMaxSize()
+        if (photo.loadState.refresh == LoadState.Loading) {
+            items(6) {
+                LoadingSkeleton()
+            }
+        } else {
+            items(
+                count = photo.itemCount,
+                key = photo.itemKey(),
+            ) { index ->
+                PhotoCard(
+                    photoUrl = photo[index]?.url,
+                    title = photo[index]?.title
                 ) {
-                    AsyncImage(
-                        model = photo[index]?.url,
-                        contentDescription = "photos image",
-                        contentScale = ContentScale.FillWidth
-                    )
-                    Text(
-                        text = photo[index]?.title ?: "",
-                        maxLines = 2,
-                        overflow = TextOverflow.Ellipsis,
-                        style = TextStyle(
-                            fontSize = 13.sp,
-                            fontFamily = FontFamily(Font(R.font.pretendard_medium))
-                        ),
-                        color = Color.White,
-                        modifier = Modifier
-                            .align(Alignment.BottomStart)
-                            .padding(8.dp)
-                    )
+                    photo[index]?.let { onNavigateToDetail(it.id) }
                 }
             }
         }
@@ -118,16 +87,12 @@ fun HomeScreen(
 }
 
 @Composable
-fun TitleText(title: String) {
-    Text(
-        text = title,
-        style = TextStyle(
-            fontSize = 20.sp,
-            fontFamily = FontFamily(Font(R.font.pretendard_extra_bold))
-        ),
-        modifier = Modifier.padding(
-            top = 20.dp,
-            bottom = 10.dp
-        )
+fun LoadingSkeleton() {
+    Box(
+        modifier = Modifier
+            .clip(shape = RoundedCornerShape(24.dp))
+            .background(color = Gray20)
+            .height(200.dp)
+            .shimmerLoadingAnimation()
     )
 }

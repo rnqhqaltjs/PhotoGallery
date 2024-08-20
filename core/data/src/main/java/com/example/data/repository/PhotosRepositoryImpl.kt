@@ -22,8 +22,7 @@ class PhotosRepositoryImpl @Inject constructor(
         return Pager(
             config = PagingConfig(
                 pageSize = 10,
-                enablePlaceholders = false,
-                maxSize = 10 * 3
+                enablePlaceholders = false
             ),
             pagingSourceFactory = pagingSourceFactory
         ).flow
@@ -42,8 +41,7 @@ class PhotosRepositoryImpl @Inject constructor(
         return Pager(
             config = PagingConfig(
                 pageSize = 5,
-                enablePlaceholders = false,
-                maxSize = 5 * 3
+                enablePlaceholders = false
             ),
             pagingSourceFactory = pagingSourceFactory
         ).flow
