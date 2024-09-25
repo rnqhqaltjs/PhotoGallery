@@ -23,29 +23,30 @@ import com.example.designsystem.theme.PhotoGalleryTheme
 @Composable
 fun PGAppBar(
     modifier: Modifier = Modifier,
-    isVisible: Boolean
+    isVisible: Boolean,
 ) {
     AnimatedVisibility(
         visible = isVisible,
         enter = slideInVertically(initialOffsetY = { -it }),
         exit = slideOutVertically(targetOffsetY = { -it }),
-        modifier = modifier
+        modifier = modifier,
     ) {
         Box(
             contentAlignment = Alignment.Center,
-            modifier = modifier
-                .fillMaxWidth()
-                .background(MaterialTheme.colorScheme.background)
+            modifier =
+                modifier
+                    .fillMaxWidth()
+                    .background(MaterialTheme.colorScheme.background),
         ) {
             Image(
                 painter = painterResource(id = R.drawable.ic_prography),
                 contentDescription = "app title",
-                modifier = Modifier.padding(top = 22.dp, bottom = 18.dp)
+                modifier = Modifier.padding(top = 22.dp, bottom = 18.dp),
             )
             HorizontalDivider(
                 modifier = Modifier.align(Alignment.BottomCenter),
                 thickness = 1.5.dp,
-                color = Gray30
+                color = Gray30,
             )
         }
     }

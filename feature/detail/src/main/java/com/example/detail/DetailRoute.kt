@@ -8,7 +8,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 @Composable
 fun DetailRoute(
     popBackStack: () -> Unit,
-    detailViewModel: DetailViewModel = hiltViewModel()
+    detailViewModel: DetailViewModel = hiltViewModel(),
 ) {
     val photoDetail by detailViewModel.photoDetail.collectAsStateWithLifecycle()
     val isBookmarked by detailViewModel.isBookmarked.collectAsStateWithLifecycle()
@@ -17,6 +17,6 @@ fun DetailRoute(
         popBackStack = popBackStack,
         detailUiState = photoDetail,
         isBookmarked = isBookmarked,
-        onBookmarkClick = { detailViewModel.toggleBookmark(it) }
+        onBookmarkClick = { detailViewModel.toggleBookmark(it) },
     )
 }

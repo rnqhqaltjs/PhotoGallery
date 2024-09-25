@@ -22,14 +22,15 @@ class MainActivity : ComponentActivity() {
         setContent {
             PhotoGalleryTheme {
                 enableEdgeToEdge(
-                    statusBarStyle = SystemBarStyle.auto(
-                        Color.Transparent.toArgb(),
-                        Color.Transparent.toArgb()
-                    )
+                    statusBarStyle =
+                        SystemBarStyle.auto(
+                            Color.Transparent.toArgb(),
+                            Color.Transparent.toArgb(),
+                        ),
                 )
                 Surface(
                     modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
+                    color = MaterialTheme.colorScheme.background,
                 ) {
                     PGApp()
                 }

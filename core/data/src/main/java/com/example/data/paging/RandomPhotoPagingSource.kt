@@ -9,17 +9,17 @@ import retrofit2.HttpException
 import java.io.IOException
 
 class RandomPhotoPagingSource(
-    private val photosDataSource: PhotosDataSource
+    private val photosDataSource: PhotosDataSource,
 ) : PagingSource<Int, Photo>() {
-    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Photo> {
-        return try {
+    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Photo> =
+        try {
             val pageNumber = params.key ?: STARTING_PAGE_INDEX
             val response = photosDataSource.getRandomPhoto(pageNumber)
 
             val data = response.map { it.toModel() }
             val prevKey = if (pageNumber == STARTING_PAGE_INDEX) null else pageNumber - 1
             val nextKey = if (response.isEmpty()) null else pageNumber + 1
-            
+
             LoadResult.Page(
                 data = data,
                 prevKey = prevKey,
@@ -30,14 +30,12 @@ class RandomPhotoPagingSource(
         } catch (exception: HttpException) {
             LoadResult.Error(exception)
         }
-    }
 
-    override fun getRefreshKey(state: PagingState<Int, Photo>): Int? {
-        return state.anchorPosition?.let { anchorPosition ->
+    override fun getRefreshKey(state: PagingState<Int, Photo>): Int? =
+        state.anchorPosition?.let { anchorPosition ->
             state.closestPageToPosition(anchorPosition)?.prevKey?.plus(1)
                 ?: state.closestPageToPosition(anchorPosition)?.nextKey?.minus(1)
         }
-    }
 
     companion object {
         const val STARTING_PAGE_INDEX = 1

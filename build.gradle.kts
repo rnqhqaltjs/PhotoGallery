@@ -7,4 +7,17 @@ plugins {
     alias(libs.plugins.hilt) apply false
     alias(libs.plugins.org.jetbrains.kotlin.jvm) apply false
     alias(libs.plugins.compose.compiler) apply false
+    id("org.jlleitschuh.gradle.ktlint") version "12.1.1"
+}
+
+subprojects {
+    apply(plugin = "org.jlleitschuh.gradle.ktlint")
+
+    ktlint {
+        version.set("1.3.1")
+        debug.set(false)
+        android.set(true)
+        outputToConsole.set(true)
+        ignoreFailures.set(true)
+    }
 }

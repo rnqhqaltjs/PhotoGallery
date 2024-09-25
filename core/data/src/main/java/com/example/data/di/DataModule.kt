@@ -15,13 +15,9 @@ import javax.inject.Singleton
 interface DataModule {
     @Singleton
     @Binds
-    fun bindPhotosRepository(
-        photosRepositoryImpl: PhotosRepositoryImpl,
-    ): PhotosRepository
+    fun bindPhotosRepository(photosRepositoryImpl: PhotosRepositoryImpl): PhotosRepository
 
     @Singleton
     @Binds
-    fun bindBookmarkRepository(
-        bookmarkRepositoryImpl: BookmarkRepositoryImpl,
-    ): BookmarkRepository
+    fun bindBookmarkRepository(bookmarkRepositoryImpl: BookmarkRepositoryImpl): BookmarkRepository
 }

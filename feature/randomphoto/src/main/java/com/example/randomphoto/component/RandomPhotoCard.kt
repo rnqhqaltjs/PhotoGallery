@@ -30,57 +30,61 @@ fun RandomPhotoCard(
     photoUrl: String?,
     onCloseClick: () -> Unit,
     onBookmarkClick: () -> Unit,
-    onInfoClick: () -> Unit
+    onInfoClick: () -> Unit,
 ) {
     Card(
         shape = RoundedCornerShape(12.dp),
-        elevation = CardDefaults.cardElevation(
-            defaultElevation = 10.dp
-        ),
-        colors = CardDefaults.cardColors(
-            containerColor = Color.White,
-        ),
-        modifier = Modifier.fillMaxSize()
+        elevation =
+            CardDefaults.cardElevation(
+                defaultElevation = 10.dp,
+            ),
+        colors =
+            CardDefaults.cardColors(
+                containerColor = Color.White,
+            ),
+        modifier = Modifier.fillMaxSize(),
     ) {
         Column(
-            modifier = Modifier.fillMaxHeight()
+            modifier = Modifier.fillMaxHeight(),
         ) {
             Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(12.dp)
-                    .clip(RoundedCornerShape(12.dp))
-                    .weight(0.68f)
-                    .background(color = Color.Black)
+                modifier =
+                    Modifier
+                        .fillMaxWidth()
+                        .padding(12.dp)
+                        .clip(RoundedCornerShape(12.dp))
+                        .weight(0.68f)
+                        .background(color = Color.Black),
             ) {
                 AsyncImage(
                     model = photoUrl,
                     contentDescription = "randomPhoto image",
                     contentScale = ContentScale.FillWidth,
-                    modifier = Modifier.align(Alignment.Center)
+                    modifier = Modifier.align(Alignment.Center),
                 )
             }
             Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(top = 20.dp, bottom = 32.dp),
+                modifier =
+                    Modifier
+                        .fillMaxWidth()
+                        .padding(top = 20.dp, bottom = 32.dp),
                 horizontalArrangement = Arrangement.SpaceEvenly,
-                verticalAlignment = Alignment.CenterVertically
+                verticalAlignment = Alignment.CenterVertically,
             ) {
                 Image(
                     painter = painterResource(id = R.drawable.ic_close_btn),
                     contentDescription = "item remove",
-                    modifier = Modifier.noRippleClickable { onCloseClick() }
+                    modifier = Modifier.noRippleClickable { onCloseClick() },
                 )
                 Image(
                     painter = painterResource(id = R.drawable.ic_bookmark_btn),
                     contentDescription = "add bookmark",
-                    modifier = Modifier.noRippleClickable { onBookmarkClick() }
+                    modifier = Modifier.noRippleClickable { onBookmarkClick() },
                 )
                 Image(
                     painter = painterResource(id = R.drawable.ic_info_btn),
                     contentDescription = "item info",
-                    modifier = Modifier.noRippleClickable { onInfoClick() }
+                    modifier = Modifier.noRippleClickable { onInfoClick() },
                 )
             }
         }

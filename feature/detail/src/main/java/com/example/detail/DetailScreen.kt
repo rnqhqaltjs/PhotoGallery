@@ -28,20 +28,21 @@ fun DetailScreen(
     popBackStack: () -> Unit,
     detailUiState: DetailUiState,
     onBookmarkClick: (Photo) -> Unit,
-    isBookmarked: Boolean
+    isBookmarked: Boolean,
 ) {
     Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(Color.Black.copy(alpha = 0.9f))
-            .statusBarsPadding()
-            .navigationBarsPadding()
+        modifier =
+            Modifier
+                .fillMaxSize()
+                .background(Color.Black.copy(alpha = 0.9f))
+                .statusBarsPadding()
+                .navigationBarsPadding(),
     ) {
         when (detailUiState) {
             is DetailUiState.Loading -> {
                 CircularProgressIndicator(
                     color = Color.White,
-                    modifier = Modifier.align(Alignment.Center)
+                    modifier = Modifier.align(Alignment.Center),
                 )
             }
 
@@ -49,34 +50,35 @@ fun DetailScreen(
                 Text(
                     text = "오류가 발생했습니다.",
                     color = Color.White,
-                    modifier = Modifier.align(Alignment.Center)
+                    modifier = Modifier.align(Alignment.Center),
                 )
             }
 
             is DetailUiState.Success -> {
                 Column(
                     modifier = Modifier.fillMaxSize(),
-                    verticalArrangement = Arrangement.SpaceBetween
+                    verticalArrangement = Arrangement.SpaceBetween,
                 ) {
                     DetailHeader(
                         userName = detailUiState.data.userName,
                         onCloseClick = { popBackStack() },
                         onDownloadClick = {},
                         onBookmarkClick = { onBookmarkClick(detailUiState.data) },
-                        isBookmarked
+                        isBookmarked,
                     )
                     AsyncImage(
                         model = detailUiState.data.url,
                         contentDescription = "detail image",
                         contentScale = ContentScale.FillWidth,
-                        modifier = Modifier
-                            .padding(10.dp)
-                            .clip(RoundedCornerShape(12.dp))
-                            .align(Alignment.CenterHorizontally)
+                        modifier =
+                            Modifier
+                                .padding(10.dp)
+                                .clip(RoundedCornerShape(12.dp))
+                                .align(Alignment.CenterHorizontally),
                     )
                     DetailBottom(
                         title = detailUiState.data.title,
-                        description = detailUiState.data.description
+                        description = detailUiState.data.description,
                     )
                 }
             }

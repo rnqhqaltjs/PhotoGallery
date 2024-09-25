@@ -18,24 +18,26 @@ fun RandomPhotoScreen(
     randomPhoto: LazyPagingItems<Photo>,
     onBookmarkClick: (Photo) -> Unit,
     onNavigateToDetail: (String) -> Unit,
-    showSnackbar: (String) -> Unit
+    showSnackbar: (String) -> Unit,
 ) {
     val coroutineScope = rememberCoroutineScope()
 
-    val pagerState = rememberPagerState(
-        initialPage = 1,
-        pageCount = { randomPhoto.itemCount }
-    )
+    val pagerState =
+        rememberPagerState(
+            initialPage = 1,
+            pageCount = { randomPhoto.itemCount },
+        )
 
     HorizontalPager(
-        modifier = Modifier
-            .padding(
-                top = 30.dp,
-                bottom = 50.dp
-            ),
+        modifier =
+            Modifier
+                .padding(
+                    top = 30.dp,
+                    bottom = 50.dp,
+                ),
         pageSpacing = 10.dp,
         contentPadding = PaddingValues(horizontal = 25.dp),
-        state = pagerState
+        state = pagerState,
     ) { pageIndex ->
         RandomPhotoCard(
             photoUrl = randomPhoto[pageIndex]?.url,
@@ -49,8 +51,7 @@ fun RandomPhotoScreen(
                     pagerState.animateScrollToPage(pageIndex + 1)
                 }
             },
-            onInfoClick = { randomPhoto[pageIndex]?.let { onNavigateToDetail(it.id) } }
+            onInfoClick = { randomPhoto[pageIndex]?.let { onNavigateToDetail(it.id) } },
         )
     }
 }
-

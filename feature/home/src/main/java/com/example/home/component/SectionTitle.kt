@@ -15,13 +15,15 @@ import com.example.designsystem.R
 fun SectionTitle(title: String) {
     Text(
         text = title,
-        style = TextStyle(
-            fontSize = 20.sp,
-            fontFamily = FontFamily(Font(R.font.pretendard_extra_bold))
-        ),
-        modifier = Modifier.padding(
-            top = 20.dp,
-            bottom = 10.dp
-        )
+        style =
+            TextStyle(
+                fontSize = 20.sp,
+                fontFamily = FontFamily(Font(R.font.pretendard_extra_bold)),
+            ),
+        modifier =
+            Modifier.padding(
+                top = 20.dp,
+                bottom = 10.dp,
+            ),
     )
 }

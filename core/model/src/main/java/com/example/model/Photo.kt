@@ -5,5 +5,5 @@ data class Photo(
     val title: String?,
     val description: String?,
     val userName: String,
-    val url: String
+    val url: String,
 )

@@ -25,12 +25,12 @@ import com.example.designsystem.component.LoadingSkeleton
 fun PhotoCard(
     photoUrl: String?,
     title: String?,
-    onClick: () -> Unit
+    onClick: () -> Unit,
 ) {
     Card(
         shape = RoundedCornerShape(12.dp),
         onClick = onClick,
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier.fillMaxSize(),
     ) {
         Box {
             SubcomposeAsyncImage(
@@ -39,20 +39,22 @@ fun PhotoCard(
                 contentScale = ContentScale.FillWidth,
                 loading = {
                     LoadingSkeleton()
-                }
+                },
             )
             Text(
                 text = title ?: "",
                 maxLines = 2,
                 overflow = TextOverflow.Ellipsis,
-                style = TextStyle(
-                    fontSize = 13.sp,
-                    fontFamily = FontFamily(Font(R.font.pretendard_medium))
-                ),
+                style =
+                    TextStyle(
+                        fontSize = 13.sp,
+                        fontFamily = FontFamily(Font(R.font.pretendard_medium)),
+                    ),
                 color = Color.White,
-                modifier = Modifier
-                    .align(Alignment.BottomStart)
-                    .padding(8.dp)
+                modifier =
+                    Modifier
+                        .align(Alignment.BottomStart)
+                        .padding(8.dp),
             )
         }
     }

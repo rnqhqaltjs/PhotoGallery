@@ -34,7 +34,7 @@ data class PhotoResponse(
     @Json(name = "liked_by_user")
     val likedByUser: Boolean,
     @Json(name = "user")
-    val user: User
+    val user: User,
 ) {
     data class Urls(
         @Json(name = "raw")
@@ -48,7 +48,7 @@ data class PhotoResponse(
         @Json(name = "thumb")
         val thumb: String,
         @Json(name = "small_s3")
-        val smallS3: String
+        val smallS3: String,
     )
 
     data class Links(
@@ -59,7 +59,7 @@ data class PhotoResponse(
         @Json(name = "download")
         val download: String,
         @Json(name = "download_location")
-        val downloadLocation: String
+        val downloadLocation: String,
     )
 
     data class User(
@@ -102,7 +102,7 @@ data class PhotoResponse(
         @Json(name = "for_hire")
         val forHire: Boolean,
         @Json(name = "social")
-        val social: Social
+        val social: Social,
     ) {
         data class Links(
             @Json(name = "self")
@@ -118,7 +118,7 @@ data class PhotoResponse(
             @Json(name = "following")
             val following: String,
             @Json(name = "followers")
-            val followers: String
+            val followers: String,
         )
 
         data class ProfileImage(
@@ -127,7 +127,7 @@ data class PhotoResponse(
             @Json(name = "medium")
             val medium: String,
             @Json(name = "large")
-            val large: String
+            val large: String,
         )
 
         data class Social(
@@ -138,7 +138,7 @@ data class PhotoResponse(
             @Json(name = "twitter_username")
             val twitterUsername: String?,
             @Json(name = "paypal_email")
-            val paypalEmail: String?
+            val paypalEmail: String?,
         )
     }
 }

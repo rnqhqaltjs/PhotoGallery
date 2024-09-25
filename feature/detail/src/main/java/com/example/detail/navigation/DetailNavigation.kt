@@ -12,22 +12,20 @@ const val detailRoute = "detail_route"
 
 fun NavController.navigateToDetail(
     itemId: String,
-    navOptions: NavOptions? = null
+    navOptions: NavOptions? = null,
 ) {
     navigate("$detailRoute/$itemId", navOptions = navOptions)
 }
 
-fun NavGraphBuilder.detailScreen(
-    popBackStack: () -> Unit
-) {
+fun NavGraphBuilder.detailScreen(popBackStack: () -> Unit) {
     composable(
         route = "$detailRoute/{itemId}",
         enterTransition = {
             slideIntoContainer(
                 AnimatedContentTransitionScope.SlideDirection.Left,
-                animationSpec = tween(700)
+                animationSpec = tween(700),
             )
-        }
+        },
     ) { _ ->
         DetailRoute(popBackStack = popBackStack)
     }

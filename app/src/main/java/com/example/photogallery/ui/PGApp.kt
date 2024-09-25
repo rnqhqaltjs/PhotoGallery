@@ -42,7 +42,7 @@ fun PGApp() {
         topBar = {
             PGAppBar(
                 modifier = Modifier.statusBarsPadding(),
-                isVisible = isVisible
+                isVisible = isVisible,
             )
         },
         bottomBar = {
@@ -60,17 +60,17 @@ fun PGApp() {
                 },
                 currentDestination = backStackEntry?.destination,
                 modifier = Modifier.navigationBarsPadding(),
-                isVisible = isVisible
+                isVisible = isVisible,
             )
         },
     ) { contentPadding ->
         Box(
-            modifier = Modifier.padding(contentPadding)
+            modifier = Modifier.padding(contentPadding),
         ) {
             PGNavHost(
                 modifier = Modifier.fillMaxSize(),
                 navController = navHostController,
-                snackbarHostState = snackbarHostState
+                snackbarHostState = snackbarHostState,
             )
         }
     }
@@ -82,13 +82,13 @@ private fun PGBottomBar(
     onNavigateToDestination: (Screen) -> Unit,
     currentDestination: NavDestination?,
     modifier: Modifier = Modifier,
-    isVisible: Boolean
+    isVisible: Boolean,
 ) {
     AnimatedVisibility(
         visible = isVisible,
         enter = slideInVertically(initialOffsetY = { it }),
         exit = slideOutVertically(targetOffsetY = { it }),
-        modifier = modifier
+        modifier = modifier,
     ) {
         PGNavigationBar(
             modifier = modifier,
@@ -99,7 +99,7 @@ private fun PGBottomBar(
                 PGNavigationBarItem(
                     selected = isSelected,
                     onClick = { onNavigateToDestination(destination) },
-                    iconResId = destination.iconResId
+                    iconResId = destination.iconResId,
                 )
             }
         }

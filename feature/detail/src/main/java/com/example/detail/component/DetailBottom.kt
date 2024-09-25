@@ -18,43 +18,47 @@ import com.example.designsystem.R
 @Composable
 fun DetailBottom(
     title: String?,
-    description: String?
+    description: String?,
 ) {
     Column(
-        modifier = Modifier.padding(
-            start = 12.dp,
-            end = 12.dp,
-            bottom = 12.dp
-        ),
-        verticalArrangement = Arrangement.spacedBy(10.dp)
+        modifier =
+            Modifier.padding(
+                start = 12.dp,
+                end = 12.dp,
+                bottom = 12.dp,
+            ),
+        verticalArrangement = Arrangement.spacedBy(10.dp),
     ) {
         Text(
             text = title ?: "Title",
             maxLines = 1,
             overflow = TextOverflow.Ellipsis,
-            style = TextStyle(
-                fontSize = 20.sp,
-                fontFamily = FontFamily(Font(R.font.pretendard_semi_bold))
-            ),
-            color = Color.White
+            style =
+                TextStyle(
+                    fontSize = 20.sp,
+                    fontFamily = FontFamily(Font(R.font.pretendard_semi_bold)),
+                ),
+            color = Color.White,
         )
         Text(
             text = description ?: "description\ndescription은 최대 2줄",
             maxLines = 2,
             overflow = TextOverflow.Ellipsis,
-            style = TextStyle(
-                fontSize = 16.sp,
-                fontFamily = FontFamily(Font(R.font.pretendard_medium))
-            ),
-            color = Color.White
+            style =
+                TextStyle(
+                    fontSize = 16.sp,
+                    fontFamily = FontFamily(Font(R.font.pretendard_medium)),
+                ),
+            color = Color.White,
         )
         Text(
             text = "#tag #tag #tag #tag",
-            style = TextStyle(
-                fontSize = 16.sp,
-                fontFamily = FontFamily(Font(R.font.pretendard_medium))
-            ),
-            color = Color.White
+            style =
+                TextStyle(
+                    fontSize = 16.sp,
+                    fontFamily = FontFamily(Font(R.font.pretendard_medium)),
+                ),
+            color = Color.White,
         )
     }
 }

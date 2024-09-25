@@ -23,17 +23,18 @@ import com.example.model.Photo
 fun HomeScreen(
     photo: LazyPagingItems<Photo>,
     bookmarkUiState: BookmarkUiState,
-    onNavigateToDetail: (String) -> Unit
+    onNavigateToDetail: (String) -> Unit,
 ) {
     LazyVerticalStaggeredGrid(
         columns = StaggeredGridCells.Fixed(2),
         horizontalArrangement = Arrangement.spacedBy(10.dp),
-        contentPadding = PaddingValues(
-            horizontal = 20.dp,
-            vertical = 10.dp
-        ),
+        contentPadding =
+            PaddingValues(
+                horizontal = 20.dp,
+                vertical = 10.dp,
+            ),
         verticalItemSpacing = 10.dp,
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier.fillMaxSize(),
     ) {
         if (bookmarkUiState is BookmarkUiState.Success && bookmarkUiState.data.isNotEmpty()) {
             item(span = StaggeredGridItemSpan.FullLine) {
@@ -42,14 +43,14 @@ fun HomeScreen(
 
             item(span = StaggeredGridItemSpan.FullLine) {
                 LazyRow(
-                    horizontalArrangement = Arrangement.spacedBy(10.dp)
+                    horizontalArrangement = Arrangement.spacedBy(10.dp),
                 ) {
                     items(
-                        count = bookmarkUiState.data.count()
+                        count = bookmarkUiState.data.count(),
                     ) { index ->
                         BookmarkCard(
                             imageUrl = bookmarkUiState.data[index].url,
-                            onClick = { onNavigateToDetail(bookmarkUiState.data[index].id) }
+                            onClick = { onNavigateToDetail(bookmarkUiState.data[index].id) },
                         )
                     }
                 }
@@ -71,7 +72,7 @@ fun HomeScreen(
             ) { index ->
                 PhotoCard(
                     photoUrl = photo[index]?.url,
-                    title = photo[index]?.title
+                    title = photo[index]?.title,
                 ) {
                     photo[index]?.let { onNavigateToDetail(it.id) }
                 }
