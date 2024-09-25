@@ -1,25 +1,19 @@
 package com.example.home
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
 import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
 import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridItemSpan
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.itemKey
-import com.example.designsystem.shimmerLoadingAnimation
-import com.example.designsystem.theme.Gray20
+import com.example.designsystem.component.LoadingSkeleton
 import com.example.home.component.BookmarkCard
 import com.example.home.component.PhotoCard
 import com.example.home.component.SectionTitle
@@ -84,15 +78,4 @@ fun HomeScreen(
             }
         }
     }
-}
-
-@Composable
-fun LoadingSkeleton() {
-    Box(
-        modifier = Modifier
-            .clip(shape = RoundedCornerShape(24.dp))
-            .background(color = Gray20)
-            .height(200.dp)
-            .shimmerLoadingAnimation()
-    )
 }

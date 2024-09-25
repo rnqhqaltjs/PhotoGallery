@@ -1,7 +1,6 @@
 package com.example.detail.component
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
@@ -21,6 +20,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.designsystem.R
+import com.example.designsystem.noRippleClickable
 
 @Composable
 fun DetailHeader(
@@ -39,7 +39,7 @@ fun DetailHeader(
             contentDescription = "close",
             modifier = Modifier
                 .scale(1.14f)
-                .clickable(onClick = onCloseClick)
+                .noRippleClickable(onClick = onCloseClick)
         )
         Spacer(modifier = Modifier.width(20.dp))
         Text(
@@ -59,7 +59,7 @@ fun DetailHeader(
             contentDescription = "download",
             modifier = Modifier
                 .scale(1.14f)
-                .clickable(onClick = onDownloadClick)
+                .noRippleClickable(onClick = onDownloadClick)
         )
         Spacer(modifier = Modifier.width(26.dp))
         Image(
@@ -72,7 +72,7 @@ fun DetailHeader(
             contentDescription = "bookmark state",
             modifier = Modifier
                 .scale(1.14f)
-                .clickable(onClick = onBookmarkClick)
+                .noRippleClickable(onClick = onBookmarkClick)
         )
         Spacer(modifier = Modifier.width(6.dp))
     }
