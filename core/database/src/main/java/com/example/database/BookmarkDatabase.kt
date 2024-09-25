@@ -7,15 +7,15 @@ import com.example.database.model.BookmarkEntity
 @Database(
     entities = [BookmarkEntity::class],
     version = 1,
-    exportSchema = false
+    exportSchema = false,
 )
-//@TypeConverters(
+// @TypeConverters(
 //    value = [
 //        UserInfoTypeConverter::class,
 //        TimeInfoTypeConverter::class,
 //        PlaceInfoTypeConverter::class
 //    ]
-//)
+// )
 abstract class BookmarkDatabase : RoomDatabase() {
     abstract fun bookmarkDao(): BookmarkDao
 }

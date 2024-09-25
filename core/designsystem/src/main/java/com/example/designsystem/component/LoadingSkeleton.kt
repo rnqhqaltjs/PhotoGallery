@@ -14,10 +14,11 @@ import com.example.designsystem.theme.Gray20
 @Composable
 fun LoadingSkeleton() {
     Box(
-        modifier = Modifier
-            .clip(shape = RoundedCornerShape(24.dp))
-            .background(color = Gray20)
-            .height(200.dp)
-            .shimmerLoadingAnimation()
+        modifier =
+            Modifier
+                .clip(shape = RoundedCornerShape(24.dp))
+                .background(color = Gray20)
+                .height(200.dp)
+                .shimmerLoadingAnimation(),
     )
 }

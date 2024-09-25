@@ -6,9 +6,10 @@ import com.example.model.Photo
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-class GetRandomPhotoUseCase @Inject constructor(
-    private val photosRepository: PhotosRepository
-) {
-    operator fun invoke(): Flow<PagingData<Photo>> =
-        photosRepository.getRandomPhoto()
-}
+class GetRandomPhotoUseCase
+    @Inject
+    constructor(
+        private val photosRepository: PhotosRepository,
+    ) {
+        operator fun invoke(): Flow<PagingData<Photo>> = photosRepository.getRandomPhoto()
+    }

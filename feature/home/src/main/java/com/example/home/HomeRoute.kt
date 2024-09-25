@@ -9,7 +9,7 @@ import androidx.paging.compose.collectAsLazyPagingItems
 @Composable
 fun HomeRoute(
     homeViewModel: HomeViewModel = hiltViewModel(),
-    onNavigateToDetail: (String) -> Unit
+    onNavigateToDetail: (String) -> Unit,
 ) {
     val photos = homeViewModel.photo.collectAsLazyPagingItems()
     val bookmarkPhoto by homeViewModel.bookmarkPhoto.collectAsStateWithLifecycle()
@@ -17,6 +17,6 @@ fun HomeRoute(
     HomeScreen(
         photo = photos,
         bookmarkUiState = bookmarkPhoto,
-        onNavigateToDetail = onNavigateToDetail
+        onNavigateToDetail = onNavigateToDetail,
     )
 }

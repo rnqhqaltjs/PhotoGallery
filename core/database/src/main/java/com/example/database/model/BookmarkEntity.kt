@@ -13,5 +13,5 @@ data class BookmarkEntity(
     val description: String?,
     @ColumnInfo(name = "user_name")
     val userName: String,
-    val url: String
+    val url: String,
 )

@@ -23,14 +23,15 @@ fun PGNavigationBar(
     content: @Composable RowScope.() -> Unit,
 ) {
     Row(
-        modifier = modifier
-            .fillMaxWidth()
-            .height(52.dp),
-        horizontalArrangement = Arrangement.SpaceBetween
+        modifier =
+            modifier
+                .fillMaxWidth()
+                .height(52.dp),
+        horizontalArrangement = Arrangement.SpaceBetween,
     ) {
         NavigationBar(
             containerColor = Black90,
-            content = content
+            content = content,
         )
     }
 }
@@ -40,7 +41,7 @@ fun RowScope.PGNavigationBarItem(
     selected: Boolean,
     onClick: () -> Unit,
     iconResId: Int,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     NavigationBarItem(
         selected = selected,
@@ -51,11 +52,12 @@ fun RowScope.PGNavigationBarItem(
                 contentDescription = "icon",
             )
         },
-        colors = NavigationBarItemDefaults.colors(
-            selectedIconColor = Color.White,
-            unselectedIconColor = Gray70,
-            indicatorColor = Color.Transparent
-        ),
-        modifier = modifier
+        colors =
+            NavigationBarItemDefaults.colors(
+                selectedIconColor = Color.White,
+                unselectedIconColor = Gray70,
+                indicatorColor = Color.Transparent,
+            ),
+        modifier = modifier,
     )
 }

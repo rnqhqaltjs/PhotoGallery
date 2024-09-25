@@ -14,20 +14,22 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class RandomPhotoViewModel @Inject constructor(
-    getRandomPhotoUseCase: GetRandomPhotoUseCase,
-    private val addBookmarkUseCase: AddBookmarkUseCase
-) : ViewModel() {
-    val randomPhoto: Flow<PagingData<Photo>> =
-        getRandomPhotoUseCase().distinctUntilChanged().cachedIn(viewModelScope)
+class RandomPhotoViewModel
+    @Inject
+    constructor(
+        getRandomPhotoUseCase: GetRandomPhotoUseCase,
+        private val addBookmarkUseCase: AddBookmarkUseCase,
+    ) : ViewModel() {
+        val randomPhoto: Flow<PagingData<Photo>> =
+            getRandomPhotoUseCase().distinctUntilChanged().cachedIn(viewModelScope)
 
-    fun addBookmark(photo: Photo) {
-        viewModelScope.launch {
-            try {
-                addBookmarkUseCase(photo)
-            } catch (e: Exception) {
-                e.printStackTrace()
+        fun addBookmark(photo: Photo) {
+            viewModelScope.launch {
+                try {
+                    addBookmarkUseCase(photo)
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
             }
         }
     }
-}

@@ -18,31 +18,39 @@ import kotlinx.coroutines.flow.stateIn
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeViewModel @Inject constructor(
-    getPhotosUseCase: GetPhotosUseCase,
-    getBookmarkPhotoUseCase: GetBookmarkPhotoUseCase
-) : ViewModel() {
-    val photo: Flow<PagingData<Photo>> =
-        getPhotosUseCase().distinctUntilChanged().cachedIn(viewModelScope)
+class HomeViewModel
+    @Inject
+    constructor(
+        getPhotosUseCase: GetPhotosUseCase,
+        getBookmarkPhotoUseCase: GetBookmarkPhotoUseCase,
+    ) : ViewModel() {
+        val photo: Flow<PagingData<Photo>> =
+            getPhotosUseCase().distinctUntilChanged().cachedIn(viewModelScope)
 
-    val bookmarkPhoto = getBookmarkPhotoUseCase()
-        .asResult()
-        .map {
-            when (it) {
-                is Result.Error -> BookmarkUiState.Failure(it.exception)
-                is Result.Loading -> BookmarkUiState.Loading
-                is Result.Success -> BookmarkUiState.Success(it.data)
-            }
-        }
-        .stateIn(
-            scope = viewModelScope,
-            started = SharingStarted.WhileSubscribed(5_000),
-            initialValue = BookmarkUiState.Loading
-        )
-}
+        val bookmarkPhoto =
+            getBookmarkPhotoUseCase()
+                .asResult()
+                .map {
+                    when (it) {
+                        is Result.Error -> BookmarkUiState.Failure(it.exception)
+                        is Result.Loading -> BookmarkUiState.Loading
+                        is Result.Success -> BookmarkUiState.Success(it.data)
+                    }
+                }.stateIn(
+                    scope = viewModelScope,
+                    started = SharingStarted.WhileSubscribed(5_000),
+                    initialValue = BookmarkUiState.Loading,
+                )
+    }
 
 sealed interface BookmarkUiState {
-    data class Success(val data: List<Photo>) : BookmarkUiState
-    data class Failure(val t: Throwable?) : BookmarkUiState
+    data class Success(
+        val data: List<Photo>,
+    ) : BookmarkUiState
+
+    data class Failure(
+        val t: Throwable?,
+    ) : BookmarkUiState
+
     data object Loading : BookmarkUiState
 }

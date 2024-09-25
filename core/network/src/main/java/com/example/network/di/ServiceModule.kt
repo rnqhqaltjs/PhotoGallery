@@ -13,7 +13,5 @@ import javax.inject.Singleton
 object ServiceModule {
     @Provides
     @Singleton
-    fun providePhotoService(retrofit: Retrofit): PhotoService {
-        return retrofit.create(PhotoService::class.java)
-    }
+    fun providePhotoService(retrofit: Retrofit): PhotoService = retrofit.create(PhotoService::class.java)
 }

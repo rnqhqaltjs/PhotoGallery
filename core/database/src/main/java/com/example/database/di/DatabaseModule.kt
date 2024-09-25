@@ -15,14 +15,15 @@ import javax.inject.Singleton
 object DatabaseModule {
     @Singleton
     @Provides
-    fun providesPromiseDatabase(@ApplicationContext context: Context): BookmarkDatabase =
+    fun providesPromiseDatabase(
+        @ApplicationContext context: Context,
+    ): BookmarkDatabase =
         Room
             .databaseBuilder(
                 context.applicationContext,
                 BookmarkDatabase::class.java,
-                "promise_database"
-            )
-            .build()
+                "promise_database",
+            ).build()
 
     @Singleton
     @Provides

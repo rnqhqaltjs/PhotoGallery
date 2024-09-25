@@ -9,14 +9,16 @@ interface PhotoService {
     @GET("photos")
     suspend fun getPhotos(
         @Query("page") page: Int,
-        @Query("per_page") perPage: Int
+        @Query("per_page") perPage: Int,
     ): List<PhotoResponse>
 
     @GET("photos/{id}")
-    suspend fun getPhotoDetail(@Path("id") id: String): PhotoResponse
+    suspend fun getPhotoDetail(
+        @Path("id") id: String,
+    ): PhotoResponse
 
     @GET("photos/random")
     suspend fun getRandomPhoto(
-        @Query("count") count: Int
+        @Query("count") count: Int,
     ): List<PhotoResponse>
 }

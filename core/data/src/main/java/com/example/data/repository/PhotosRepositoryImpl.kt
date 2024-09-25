@@ -13,37 +13,40 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
-class PhotosRepositoryImpl @Inject constructor(
-    private val photosDataSource: PhotosDataSource
-) : PhotosRepository {
-    override fun getPhotosPaging(): Flow<PagingData<Photo>> {
-        val pagingSourceFactory = { PhotosPagingSource(photosDataSource) }
+class PhotosRepositoryImpl
+    @Inject
+    constructor(
+        private val photosDataSource: PhotosDataSource,
+    ) : PhotosRepository {
+        override fun getPhotosPaging(): Flow<PagingData<Photo>> {
+            val pagingSourceFactory = { PhotosPagingSource(photosDataSource) }
 
-        return Pager(
-            config = PagingConfig(
-                pageSize = 10,
-                enablePlaceholders = false
-            ),
-            pagingSourceFactory = pagingSourceFactory
-        ).flow
-    }
+            return Pager(
+                config =
+                    PagingConfig(
+                        pageSize = 10,
+                        enablePlaceholders = false,
+                    ),
+                pagingSourceFactory = pagingSourceFactory,
+            ).flow
+        }
 
-    override fun getPhotoDetail(id: String): Flow<Photo> {
-        return flow {
-            val result = photosDataSource.getPhotoDetail(id)
-            emit(result.toModel())
+        override fun getPhotoDetail(id: String): Flow<Photo> =
+            flow {
+                val result = photosDataSource.getPhotoDetail(id)
+                emit(result.toModel())
+            }
+
+        override fun getRandomPhoto(): Flow<PagingData<Photo>> {
+            val pagingSourceFactory = { RandomPhotoPagingSource(photosDataSource) }
+
+            return Pager(
+                config =
+                    PagingConfig(
+                        pageSize = 5,
+                        enablePlaceholders = false,
+                    ),
+                pagingSourceFactory = pagingSourceFactory,
+            ).flow
         }
     }
-
-    override fun getRandomPhoto(): Flow<PagingData<Photo>> {
-        val pagingSourceFactory = { RandomPhotoPagingSource(photosDataSource) }
-
-        return Pager(
-            config = PagingConfig(
-                pageSize = 5,
-                enablePlaceholders = false
-            ),
-            pagingSourceFactory = pagingSourceFactory
-        ).flow
-    }
-}

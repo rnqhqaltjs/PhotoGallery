@@ -9,34 +9,30 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
-class BookmarkRepositoryImpl @Inject constructor(
-    private val bookmarkDao: BookmarkDao
-) : BookmarkRepository {
-    override suspend fun addBookmark(photo: Photo) {
-        return bookmarkDao.addBookmark(photo.toEntity())
-    }
+class BookmarkRepositoryImpl
+    @Inject
+    constructor(
+        private val bookmarkDao: BookmarkDao,
+    ) : BookmarkRepository {
+        override suspend fun addBookmark(photo: Photo) = bookmarkDao.addBookmark(photo.toEntity())
 
-    override suspend fun deleteBookmark(photo: Photo) {
-        return bookmarkDao.deleteBookmark(photo.toEntity())
-    }
+        override suspend fun deleteBookmark(photo: Photo) = bookmarkDao.deleteBookmark(photo.toEntity())
 
-    override fun getBookmarkPhoto(): Flow<List<Photo>> {
-        return bookmarkDao.getBookmarkPhoto()
-            .map { bookmark ->
-                bookmark.map {
+        override fun getBookmarkPhoto(): Flow<List<Photo>> =
+            bookmarkDao
+                .getBookmarkPhoto()
+                .map { bookmark ->
+                    bookmark.map {
+                        it.toModel()
+                    }
+                }
+
+        override fun getBookmarkDetail(id: String): Flow<Photo> =
+            bookmarkDao
+                .getBookmarkDetail(id)
+                .map {
                     it.toModel()
                 }
-            }
-    }
 
-    override fun getBookmarkDetail(id: String): Flow<Photo> {
-        return bookmarkDao.getBookmarkDetail(id)
-            .map {
-                it.toModel()
-            }
+        override fun isBookmarked(id: String): Flow<Boolean> = bookmarkDao.isBookmarked(id)
     }
-
-    override fun isBookmarked(id: String): Flow<Boolean> {
-        return bookmarkDao.isBookmarked(id)
-    }
-}

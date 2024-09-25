@@ -28,51 +28,57 @@ fun DetailHeader(
     onCloseClick: () -> Unit,
     onDownloadClick: () -> Unit,
     onBookmarkClick: () -> Unit,
-    isBookmarked: Boolean
+    isBookmarked: Boolean,
 ) {
     Row(
         modifier = Modifier.padding(20.dp),
-        verticalAlignment = Alignment.CenterVertically
+        verticalAlignment = Alignment.CenterVertically,
     ) {
         Image(
             painter = painterResource(id = R.drawable.ic_close_black),
             contentDescription = "close",
-            modifier = Modifier
-                .scale(1.14f)
-                .noRippleClickable(onClick = onCloseClick)
+            modifier =
+                Modifier
+                    .scale(1.14f)
+                    .noRippleClickable(onClick = onCloseClick),
         )
         Spacer(modifier = Modifier.width(20.dp))
         Text(
             text = userName,
             maxLines = 1,
             overflow = TextOverflow.Ellipsis,
-            style = TextStyle(
-                fontSize = 18.sp,
-                fontFamily = FontFamily(Font(R.font.pretendard_bold))
-            ),
+            style =
+                TextStyle(
+                    fontSize = 18.sp,
+                    fontFamily = FontFamily(Font(R.font.pretendard_bold)),
+                ),
             color = Color.White,
-            modifier = Modifier.widthIn(max = 200.dp)
+            modifier = Modifier.widthIn(max = 200.dp),
         )
         Spacer(modifier = Modifier.weight(1f))
         Image(
             painter = painterResource(id = R.drawable.ic_download),
             contentDescription = "download",
-            modifier = Modifier
-                .scale(1.14f)
-                .noRippleClickable(onClick = onDownloadClick)
+            modifier =
+                Modifier
+                    .scale(1.14f)
+                    .noRippleClickable(onClick = onDownloadClick),
         )
         Spacer(modifier = Modifier.width(26.dp))
         Image(
-            painter = painterResource(
-                if (isBookmarked)
-                    R.drawable.ic_bookmark_white
-                else
-                    R.drawable.ic_bookmark_gray
-            ),
+            painter =
+                painterResource(
+                    if (isBookmarked) {
+                        R.drawable.ic_bookmark_white
+                    } else {
+                        R.drawable.ic_bookmark_gray
+                    },
+                ),
             contentDescription = "bookmark state",
-            modifier = Modifier
-                .scale(1.14f)
-                .noRippleClickable(onClick = onBookmarkClick)
+            modifier =
+                Modifier
+                    .scale(1.14f)
+                    .noRippleClickable(onClick = onBookmarkClick),
         )
         Spacer(modifier = Modifier.width(6.dp))
     }

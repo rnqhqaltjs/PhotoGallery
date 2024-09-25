@@ -14,18 +14,19 @@ import com.example.designsystem.noRippleClickable
 @Composable
 fun BookmarkCard(
     imageUrl: String,
-    onClick: () -> Unit
+    onClick: () -> Unit,
 ) {
     SubcomposeAsyncImage(
         model = imageUrl,
         contentDescription = "bookmark image",
         contentScale = ContentScale.Fit,
-        modifier = Modifier
-            .height(120.dp)
-            .clip(RoundedCornerShape(12.dp))
-            .noRippleClickable { onClick() },
+        modifier =
+            Modifier
+                .height(120.dp)
+                .clip(RoundedCornerShape(12.dp))
+                .noRippleClickable { onClick() },
         loading = {
             LoadingSkeleton()
-        }
+        },
     )
 }

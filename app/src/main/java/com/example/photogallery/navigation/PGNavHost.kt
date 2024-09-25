@@ -14,7 +14,6 @@ import com.example.randomphoto.navigation.randomPhotoScreen
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
-
 @Composable
 fun PGNavHost(
     modifier: Modifier = Modifier,
@@ -26,12 +25,12 @@ fun PGNavHost(
     NavHost(
         modifier = modifier,
         navController = navController,
-        startDestination = homeRoute
+        startDestination = homeRoute,
     ) {
         homeScreen(
             onNavigateToDetail = { itemId ->
                 navController.navigateToDetail(itemId)
-            }
+            },
         )
         randomPhotoScreen(
             showSnackbar = { message ->
@@ -39,7 +38,7 @@ fun PGNavHost(
             },
             onNavigateToDetail = { itemId ->
                 navController.navigateToDetail(itemId)
-            }
+            },
         )
         detailScreen(popBackStack = navController::popBackStack)
     }

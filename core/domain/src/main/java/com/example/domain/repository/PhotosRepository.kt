@@ -6,6 +6,8 @@ import kotlinx.coroutines.flow.Flow
 
 interface PhotosRepository {
     fun getPhotosPaging(): Flow<PagingData<Photo>>
+
     fun getPhotoDetail(id: String): Flow<Photo>
+
     fun getRandomPhoto(): Flow<PagingData<Photo>>
 }

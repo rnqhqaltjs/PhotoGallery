@@ -8,7 +8,7 @@ import androidx.paging.compose.collectAsLazyPagingItems
 fun RandomPhotoRoute(
     randomPhotoViewModel: RandomPhotoViewModel = hiltViewModel(),
     showSnackbar: (String) -> Unit,
-    onNavigateToDetail: (String) -> Unit
+    onNavigateToDetail: (String) -> Unit,
 ) {
     val randomPhoto = randomPhotoViewModel.randomPhoto.collectAsLazyPagingItems()
 
@@ -16,6 +16,6 @@ fun RandomPhotoRoute(
         randomPhoto = randomPhoto,
         onBookmarkClick = { randomPhotoViewModel.addBookmark(it) },
         onNavigateToDetail = onNavigateToDetail,
-        showSnackbar = showSnackbar
+        showSnackbar = showSnackbar,
     )
 }

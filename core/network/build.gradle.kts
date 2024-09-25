@@ -21,7 +21,7 @@ android {
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                "proguard-rules.pro",
             )
         }
     }
@@ -47,7 +47,7 @@ dependencies {
     implementation(libs.retrofit.core)
     implementation(libs.retrofit.moshi)
     implementation(libs.moshi.kotlin)
-    
+
     implementation(libs.hilt.android)
     ksp(libs.hilt.compiler)
     kspTest(libs.hilt.compiler)
