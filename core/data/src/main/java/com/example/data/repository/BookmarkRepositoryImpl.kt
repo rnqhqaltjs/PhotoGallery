@@ -29,6 +29,13 @@ class BookmarkRepositoryImpl @Inject constructor(
             }
     }
 
+    override fun getBookmarkDetail(id: String): Flow<Photo> {
+        return bookmarkDao.getBookmarkDetail(id)
+            .map {
+                it.toModel()
+            }
+    }
+
     override fun isBookmarked(id: String): Flow<Boolean> {
         return bookmarkDao.isBookmarked(id)
     }

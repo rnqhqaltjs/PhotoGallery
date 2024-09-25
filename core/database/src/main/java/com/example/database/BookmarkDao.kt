@@ -20,7 +20,7 @@ interface BookmarkDao {
     fun getBookmarkPhoto(): Flow<List<BookmarkEntity>>
 
     @Query("SELECT * FROM bookmarks WHERE id = :id")
-    fun getBookmarkDetail(id: String): BookmarkEntity
+    fun getBookmarkDetail(id: String): Flow<BookmarkEntity>
 
     @Query("SELECT EXISTS(SELECT * FROM bookmarks WHERE id = :id)")
     fun isBookmarked(id: String): Flow<Boolean>

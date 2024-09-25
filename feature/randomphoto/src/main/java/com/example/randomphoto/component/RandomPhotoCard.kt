@@ -2,7 +2,6 @@ package com.example.randomphoto.component
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -24,6 +23,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.example.designsystem.R
+import com.example.designsystem.noRippleClickable
 
 @Composable
 fun RandomPhotoCard(
@@ -70,17 +70,17 @@ fun RandomPhotoCard(
                 Image(
                     painter = painterResource(id = R.drawable.ic_close_btn),
                     contentDescription = "item remove",
-                    modifier = Modifier.clickable { onCloseClick() }
+                    modifier = Modifier.noRippleClickable { onCloseClick() }
                 )
                 Image(
                     painter = painterResource(id = R.drawable.ic_bookmark_btn),
                     contentDescription = "add bookmark",
-                    modifier = Modifier.clickable { onBookmarkClick() }
+                    modifier = Modifier.noRippleClickable { onBookmarkClick() }
                 )
                 Image(
                     painter = painterResource(id = R.drawable.ic_info_btn),
                     contentDescription = "item info",
-                    modifier = Modifier.clickable { onInfoClick() }
+                    modifier = Modifier.noRippleClickable { onInfoClick() }
                 )
             }
         }

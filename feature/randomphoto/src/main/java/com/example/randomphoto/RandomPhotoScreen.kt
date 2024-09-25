@@ -1,6 +1,5 @@
 package com.example.randomphoto
 
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.pager.HorizontalPager
@@ -14,7 +13,6 @@ import com.example.model.Photo
 import com.example.randomphoto.component.RandomPhotoCard
 import kotlinx.coroutines.launch
 
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun RandomPhotoScreen(
     randomPhoto: LazyPagingItems<Photo>,

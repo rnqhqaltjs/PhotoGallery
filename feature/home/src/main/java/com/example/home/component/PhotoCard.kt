@@ -19,7 +19,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.SubcomposeAsyncImage
 import com.example.designsystem.R
-import com.example.home.LoadingSkeleton
+import com.example.designsystem.component.LoadingSkeleton
 
 @Composable
 fun PhotoCard(
