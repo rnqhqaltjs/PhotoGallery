@@ -5,7 +5,7 @@ https://github.com/rnqhqaltjs/9th-aos-prography-quest
 ## 이미지 다운로드 기능 구현
 
 ### DownLoadManager vs MediaStore
-저는 DownLoadManager를 사용하여 이미지 다운로드 기능을 구현하였습니다.
+여러 고민 끝에 DownLoadManager를 사용하여 이미지 다운로드 기능을 구현하였습니다.
 
 ### Why Use DownloadManager?
 - #### 상대적으로 간단한 구현  
