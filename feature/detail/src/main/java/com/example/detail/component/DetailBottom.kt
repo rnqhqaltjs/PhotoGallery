@@ -7,6 +7,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
@@ -30,7 +31,7 @@ fun DetailBottom(
         verticalArrangement = Arrangement.spacedBy(10.dp),
     ) {
         Text(
-            text = title ?: "Title",
+            text = title ?: stringResource(R.string.title),
             maxLines = 1,
             overflow = TextOverflow.Ellipsis,
             style =
@@ -41,7 +42,7 @@ fun DetailBottom(
             color = Color.White,
         )
         Text(
-            text = description ?: "description\ndescription은 최대 2줄",
+            text = description ?: stringResource(R.string.description),
             maxLines = 2,
             overflow = TextOverflow.Ellipsis,
             style =
@@ -52,7 +53,7 @@ fun DetailBottom(
             color = Color.White,
         )
         Text(
-            text = "#tag #tag #tag #tag",
+            text = stringResource(R.string.tag),
             style =
                 TextStyle(
                     fontSize = 16.sp,
