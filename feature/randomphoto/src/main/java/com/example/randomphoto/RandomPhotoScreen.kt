@@ -7,8 +7,10 @@ import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.paging.compose.LazyPagingItems
+import com.example.designsystem.R
 import com.example.model.Photo
 import com.example.randomphoto.component.RandomPhotoCard
 import kotlinx.coroutines.launch
@@ -39,6 +41,9 @@ fun RandomPhotoScreen(
         contentPadding = PaddingValues(horizontal = 25.dp),
         state = pagerState,
     ) { pageIndex ->
+        val context = LocalContext.current
+        val message = context.getString(R.string.bookmark_complete)
+
         RandomPhotoCard(
             photoUrl = randomPhoto[pageIndex]?.url,
             onCloseClick = {},
@@ -46,7 +51,7 @@ fun RandomPhotoScreen(
                 randomPhoto[pageIndex]?.let {
                     onBookmarkClick(it)
                 }
-                showSnackbar("북마크 완료")
+                showSnackbar(message)
                 coroutineScope.launch {
                     pagerState.animateScrollToPage(pageIndex + 1)
                 }

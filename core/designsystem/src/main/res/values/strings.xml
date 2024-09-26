@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="bookmark">북마크</string>
+    <string name="recent_image">최신 이미지</string>
+    <string name="bookmark_complete">북마크 완료</string>
+    <string name="download_started">다운로드 시작</string>
+    <string name="error_occurred">오류가 발생했습니다.</string>
+    <string name="title" translatable="false">Title</string>
+    <string name="description">description\ndescription은 최대 2줄</string>
+    <string name="tag" translatable="false">#tag #tag #tag #tag</string>
+</resources>

@@ -9,10 +9,12 @@ import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
 import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridItemSpan
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.itemKey
+import com.example.designsystem.R
 import com.example.designsystem.component.LoadingSkeleton
 import com.example.home.component.BookmarkCard
 import com.example.home.component.PhotoCard
@@ -38,7 +40,7 @@ fun HomeScreen(
     ) {
         if (bookmarkUiState is BookmarkUiState.Success && bookmarkUiState.data.isNotEmpty()) {
             item(span = StaggeredGridItemSpan.FullLine) {
-                SectionTitle(title = "북마크")
+                SectionTitle(title = stringResource(R.string.bookmark))
             }
 
             item(span = StaggeredGridItemSpan.FullLine) {
@@ -58,7 +60,7 @@ fun HomeScreen(
         }
 
         item(span = StaggeredGridItemSpan.FullLine) {
-            SectionTitle(title = "최신 이미지")
+            SectionTitle(title = stringResource(R.string.recent_image))
         }
 
         if (photo.loadState.refresh == LoadState.Loading) {
