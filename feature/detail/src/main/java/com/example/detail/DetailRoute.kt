@@ -17,6 +17,7 @@ fun DetailRoute(
         popBackStack = popBackStack,
         detailUiState = photoDetail,
         isBookmarked = isBookmarked,
+        onDownloadClick = { detailViewModel.downloadPhoto(it) },
         onBookmarkClick = { detailViewModel.toggleBookmark(it) },
     )
 }

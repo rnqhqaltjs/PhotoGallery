@@ -8,6 +8,7 @@ import com.example.common.asResult
 import com.example.domain.repository.BookmarkRepository
 import com.example.domain.usecase.AddBookmarkUseCase
 import com.example.domain.usecase.DeleteBookmarkUseCase
+import com.example.domain.usecase.DownloadPhotoUseCase
 import com.example.domain.usecase.GetPhotoDetailUseCase
 import com.example.model.Photo
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -29,6 +30,7 @@ class DetailViewModel
         bookmarkRepository: BookmarkRepository,
         private val addBookmarkUseCase: AddBookmarkUseCase,
         private val deleteBookmarkUseCase: DeleteBookmarkUseCase,
+        private val downloadPhotoUseCase: DownloadPhotoUseCase,
     ) : ViewModel() {
         private val id: StateFlow<String> = savedStateHandle.getStateFlow("itemId", "")
 
@@ -71,6 +73,12 @@ class DetailViewModel
                 } catch (e: Exception) {
                     e.printStackTrace()
                 }
+            }
+        }
+
+        fun downloadPhoto(photoUrl: String) {
+            viewModelScope.launch {
+                downloadPhotoUseCase(photoUrl)
             }
         }
     }
