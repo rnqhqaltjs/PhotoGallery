@@ -19,8 +19,10 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
+import com.example.designsystem.R
 import com.example.detail.component.DetailBottom
 import com.example.detail.component.DetailHeader
 import com.example.model.Photo
@@ -35,13 +37,14 @@ fun DetailScreen(
 ) {
     Box(
         modifier =
-            Modifier
-                .fillMaxSize()
-                .background(Color.Black.copy(alpha = 0.9f))
-                .statusBarsPadding()
-                .navigationBarsPadding(),
+        Modifier
+            .fillMaxSize()
+            .background(Color.Black.copy(alpha = 0.9f))
+            .statusBarsPadding()
+            .navigationBarsPadding(),
     ) {
         val context = LocalContext.current
+        val message = context.getString(R.string.download_started)
 
         when (detailUiState) {
             is DetailUiState.Loading -> {
@@ -53,7 +56,7 @@ fun DetailScreen(
 
             is DetailUiState.Failure -> {
                 Text(
-                    text = "오류가 발생했습니다.",
+                    text = stringResource(R.string.error_occurred),
                     color = Color.White,
                     modifier = Modifier.align(Alignment.Center),
                 )
@@ -68,9 +71,7 @@ fun DetailScreen(
                         userName = detailUiState.data.userName,
                         onCloseClick = { popBackStack() },
                         onDownloadClick = {
-                            Toast
-                                .makeText(context, "다운로드 시작", Toast.LENGTH_SHORT)
-                                .show()
+                            Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
                             onDownloadClick(detailUiState.data.url)
                         },
                         onBookmarkClick = { onBookmarkClick(detailUiState.data) },
@@ -81,10 +82,10 @@ fun DetailScreen(
                         contentDescription = "detail image",
                         contentScale = ContentScale.FillWidth,
                         modifier =
-                            Modifier
-                                .padding(10.dp)
-                                .clip(RoundedCornerShape(12.dp))
-                                .align(Alignment.CenterHorizontally),
+                        Modifier
+                            .padding(10.dp)
+                            .clip(RoundedCornerShape(12.dp))
+                            .align(Alignment.CenterHorizontally),
                     )
                     DetailBottom(
                         title = detailUiState.data.title,
