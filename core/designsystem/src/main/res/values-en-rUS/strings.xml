@@ -4,7 +4,6 @@
     <string name="bookmark_complete">Bookmark Complete</string>
     <string name="download_started">Download started</string>
     <string name="error_occurred">An error occurred.</string>
-    <string name="error_occurred">An error occurred.\"</string>
     <string name="description">Description\\nThe description can be up to 2 lines.</string>
     <string name="recent_image">Recent Image</string>
 </resources>

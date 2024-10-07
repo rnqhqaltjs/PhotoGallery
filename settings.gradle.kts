@@ -25,13 +25,14 @@ include(":app")
 // core
 include(":core:data")
 include(":core:domain")
-
-// Feature
-include(":feature:home")
-include(":feature:randomphoto")
-include(":feature:detail")
 include(":core:designsystem")
 include(":core:common")
 include(":core:network")
 include(":core:database")
 include(":core:model")
+
+
+// Feature
+include(":feature:home")
+include(":feature:randomphoto")
+include(":feature:detail")
